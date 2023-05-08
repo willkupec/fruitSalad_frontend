@@ -12,6 +12,7 @@ import {
 } from "@mui/material"
 import LoginError from "../../components/LoginError"
 import { REGISTRATION } from "../../constants/routes"
+import Header from "../../components/Header"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -38,7 +39,8 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <>
+      <Header />
       <Container component="main" maxWidth="sm">
         <Paper
           elevation={24}
@@ -166,7 +168,7 @@ const Login = () => {
           </Link>
         </Typography>
       </Container>
-    </div>
+    </>
   )
 }
 
