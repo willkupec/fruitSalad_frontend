@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import {
   Box,
   Container,
@@ -11,18 +11,14 @@ import {
   Paper,
 } from "@mui/material"
 import LoginError from "../../components/LoginError"
+import { LOGIN } from "../../constants/routes"
 
 const Registration = () => {
-    //const navigate = useNavigate()
+    const navigate = useNavigate()
     const [showLoginError, setShowLoginError] = useState("none")
     const [errorMsg, setErrorMsg] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    const switchPage = (page) => {
-        setErrorMsg("")
-        setShowLoginError("none")
-      }
 
     const handleRegister = async (event) => {
         event.preventDefault()
@@ -34,7 +30,7 @@ const Registration = () => {
             setErrorMsg(user.message)
           } else {
             localStorage.setItem("validateEmail", JSON.stringify(user))
-            // navigate(LOGIN)
+            navigate(LOGIN)
           }
         } catch (e) {
           console.log(e.message)
@@ -49,31 +45,19 @@ const Registration = () => {
           sx={{
             display: "block",
             margin: "auto",
-            mt: "-8%",
+            mt: "30%",
             borderRadius: "12px",
             width: 400,
             height: 500,
-            backgroundColor: "primary.main",
+            backgroundColor: "white",
           }}
         >
-          <Box
-            sx={{
-              backgroundColor: "white",
-              borderRadius: "12px",
-              width: "95%",
-              height: "96%",
-              ml: "auto",
-              mr: "auto",
-              top: "2%",
-              position: "relative",
-            }}
-          >
             <Box
               component="form"
               onSubmit={handleRegister}
               noValidate
               sx={{
-                backgroundColor: "primary.main",
+                backgroundColor: "black",
                 borderRadius: "12px",
                 width: "97%",
                 height: "97%",
@@ -154,7 +138,6 @@ const Registration = () => {
               </Grid>
               <LoginError msg={errorMsg} visible={showLoginError} />
             </Box>
-          </Box>
         </Paper>
         <Typography
           variant="h5"
@@ -167,10 +150,10 @@ const Registration = () => {
             width: "30rem",
           }}
         >
-          Already have an account{" "}
+          Already have an account?{" "}
           <Link
             onClick={() => {
-              switchPage("Login")
+              navigate(LOGIN)
             }}
             sx={{
               color: "black",
