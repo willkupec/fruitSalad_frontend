@@ -143,7 +143,7 @@ const Registration = () => {
           variant="h5"
           sx={{
             textAlign: "center",
-            color: "black",
+            color: "white",
             ml: "auto",
             mr: "auto",
             mt: "5vh",
@@ -156,7 +156,7 @@ const Registration = () => {
               navigate(LOGIN)
             }}
             sx={{
-              color: "black",
+              color: "white",
               textDecoration: "none",
               "&:hover": {
                 textDecoration: "underline",
