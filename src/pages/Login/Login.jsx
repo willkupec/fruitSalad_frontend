@@ -38,7 +38,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <>
       <Container component="main" maxWidth="sm">
         <Paper
           elevation={24}
@@ -126,7 +126,7 @@ const Login = () => {
                     border: "3px solid black",
                     borderRadius: "5px",
                     "&:hover": {
-                      backgroundColor: "white",
+                      backgroundColor: "black",
                       color: "primary.main",
                     },
                   }}
@@ -142,7 +142,7 @@ const Login = () => {
           variant="h5"
           sx={{
             textAlign: "center",
-            color: "black",
+            color: "white",
             ml: "auto",
             mr: "auto",
             mt: "5vh",
@@ -155,7 +155,7 @@ const Login = () => {
               navigate(REGISTRATION)
             }}
             sx={{
-              color: "black",
+              color: "white",
               textDecoration: "none",
               "&:hover": {
                 textDecoration: "underline",
@@ -166,7 +166,7 @@ const Login = () => {
           </Link>
         </Typography>
       </Container>
-    </div>
+    </>
   )
 }
 

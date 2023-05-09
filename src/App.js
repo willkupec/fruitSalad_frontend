@@ -2,16 +2,21 @@ import React from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import Login from "./pages/Login/Login"
 import Registration from "./pages/Registration/Registration"
+import Home from "./pages/Home/Home"
 import { LOGIN, REGISTRATION } from "./constants/routes"
+import Header from "./components/Header"
 
 const App = () => {
   const location = useLocation()
   return (
-    <Routes location={location}>
-      <Route path={LOGIN} element={<Login />} />
-      <Route path={REGISTRATION} element={<Registration />} />
-      <Route path={"*"} element={<Login />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes location={location}>
+        <Route path={"*"} element={<Home />} />
+        <Route path={LOGIN} element={<Login />} />
+        <Route path={REGISTRATION} element={<Registration />} />
+      </Routes>
+    </>
   )
 }
 
