@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
   Box,
@@ -10,27 +10,36 @@ import {
   Grid,
   Paper,
 } from "@mui/material"
-import LoginError from "../../components/LoginError"
-import { REGISTRATION } from "../../constants/routes"
+import { HOME, REGISTRATION } from "../../constants/frontend_routes"
+import { LOGIN_API } from "../../constants/api_routes"
+import UserContext from "../../context/UserContext"
+
+const loginUser = async (credentials) => {
+  return fetch(LOGIN_API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  }).then((data) => data.json())
+}
 
 const Login = () => {
   const navigate = useNavigate()
-  const [showLoginError, setShowLoginError] = useState("none")
-  const [errorMsg, setErrorMsg] = useState("")
+  const { setUserData } = useContext(UserContext)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = {}
+      const user = await loginUser({ email, password })
 
       if (user.error) {
-        setShowLoginError("inherit")
-        setErrorMsg(user.message)
+        console.log("error:", user.error)
       } else {
-        localStorage.setItem("user", JSON.stringify(user))
-        // navigate(trading)
+        setUserData(user)
+        navigate(HOME)
       }
     } catch (e) {
       console.log(e.message)
@@ -135,7 +144,6 @@ const Login = () => {
                 </Button>
               </Grid>
             </Grid>
-            <LoginError msg={errorMsg} visible={showLoginError} />
           </Box>
         </Paper>
         <Typography

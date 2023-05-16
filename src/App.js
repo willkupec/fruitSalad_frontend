@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom"
 import Login from "./pages/Login/Login"
 import Registration from "./pages/Registration/Registration"
 import Home from "./pages/Home/Home"
-import { LOGIN, REGISTRATION } from "./constants/routes"
+import { LOGIN, REGISTRATION } from "./constants/frontend_routes"
 import Header from "./components/Header"
 
 const App = () => {
