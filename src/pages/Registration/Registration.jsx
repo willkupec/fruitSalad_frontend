@@ -15,6 +15,7 @@ import { REGISTRATION_API } from "../../constants/api_routes"
 import UserContext from "../../context/UserContext"
 
 const registerUser = async (credentials) => {
+  console.log(JSON.stringify(credentials))
   return fetch(REGISTRATION_API, {
     method: "POST",
     headers: {

@@ -5,18 +5,19 @@ import Registration from "./pages/Registration/Registration"
 import Home from "./pages/Home/Home"
 import { LOGIN, REGISTRATION } from "./constants/frontend_routes"
 import Header from "./components/Header"
+import UserProvider from "./context/UserProvider"
 
 const App = () => {
   const location = useLocation()
   return (
-    <>
+    <UserProvider>
       <Header />
       <Routes location={location}>
         <Route path={"*"} element={<Home />} />
         <Route path={LOGIN} element={<Login />} />
         <Route path={REGISTRATION} element={<Registration />} />
       </Routes>
-    </>
+    </UserProvider>
   )
 }
 

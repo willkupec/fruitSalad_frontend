@@ -15,6 +15,7 @@ import { LOGIN_API } from "../../constants/api_routes"
 import UserContext from "../../context/UserContext"
 
 const loginUser = async (credentials) => {
+  console.log(JSON.stringify(credentials))
   return fetch(LOGIN_API, {
     method: "POST",
     headers: {
