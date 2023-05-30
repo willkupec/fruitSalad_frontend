@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import {
-  Box,
   Container,
   TextField,
   Button,
@@ -35,7 +34,7 @@ const Registration = () => {
   const handleRegister = async (event) => {
     event.preventDefault()
     try {
-      const user = await registerUser({firstName, lastName, email, password})
+      const user = await registerUser({ firstName, lastName, email, password })
 
       if (user.error) {
         console.log("error:", user.error)
@@ -49,156 +48,213 @@ const Registration = () => {
   }
 
   return (
-    <div>
-      <Container component="main" maxWidth="sm">
-        <Paper
-          elevation={24}
-          sx={{
-            display: "block",
-            margin: "auto",
-            mt: "15%",
-            borderRadius: "12px",
-            width: 400,
-            height: 600,
-            backgroundColor: "white",
-          }}
+    <Container component="main" maxWidth="md">
+      <Paper
+        component="form"
+        onSubmit={handleRegister}
+        noValidate
+        elevation={24}
+        sx={{
+          mt: "10%",
+          borderRadius: "30px",
+          width: 900,
+          height: 700,
+          backgroundColor: "white",
+          pl: "5rem",
+          pr: "5rem",
+          pt: "3rem",
+        }}
+      >
+        <Grid
+          container
+          columnSpacing={1}
+          alignItems="center"
+          sx={{ width: "100%", height: "85%" }}
         >
-          <Box
-            component="form"
-            onSubmit={handleRegister}
-            noValidate
-            sx={{
-              backgroundColor: "black",
-              borderRadius: "12px",
-              width: "97%",
-              height: "97%",
-              ml: "auto",
-              mr: "auto",
-              top: "1.5%",
-              p: "1.5rem",
-              position: "relative",
-            }}
-          >
-            <Grid
-              container
-              spacing={1}
-              alignItems="center"
-              sx={{ height: "100%", width: "100%" }}
+          <Grid item xs={12}>
+            <Typography
+              variant="h4"
+              sx={{
+                mb: "1.75rem",
+                textAlign: "left",
+                color: "#1e1e1e",
+                fontWeight: "bold",
+              }}
             >
-              <Grid item xs={12}>
-                <Typography sx={{ color: "white" }}>First Name</Typography>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  onChange={(e) => setFirstName(e.target.value)}
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "white",
-                    height: "3.5rem",
-                    borderRadius: "0.3rem",
+              CREATE ACCOUNT
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="firstName"
+              name="firstName"
+              autoComplete="firstName"
+              label="First Name"
+              onChange={(e) => setFirstName(e.target.value)}
+              variant="outlined"
+              sx={{
+                backgroundColor: "white",
+                height: "3.5rem",
+                borderRadius: "5px",
+                ".MuiInputLabel-root": {
+                  color: "#1e1e1e",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="lastName"
+              name="lastName"
+              autoComplete="lastName"
+              label="Last Name"
+              onChange={(e) => setLastName(e.target.value)}
+              variant="outlined"
+              sx={{
+                backgroundColor: "white",
+                height: "3.5rem",
+                borderRadius: "5px",
+                ".MuiInputLabel-root": {
+                  color: "#1e1e1e",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              name="email"
+              autoComplete="email"
+              label="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              variant="outlined"
+              sx={{
+                backgroundColor: "white",
+                height: "3.5rem",
+                borderRadius: "5px",
+                ".MuiInputLabel-root": {
+                  color: "#1e1e1e",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              type="password"
+              id="password"
+              label="Password"
+              autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{
+                backgroundColor: "white",
+                height: "3.5rem",
+                borderRadius: "5px",
+                ".MuiInputLabel-root": {
+                  color: "#1e1e1e",
+                },
+                ".MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#1e1e1e",
+                },
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Button
+              type="submit"
+              fullWidth
+              disabled={!(email.length > 0 && password.length > 0)}
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: "#88CF9F",
+                fontWeight: "bold",
+                color: "white",
+                height: "3.5rem",
+                borderRadius: "5px",
+                "&:hover": {
+                  backgroundColor: "black",
+                  color: "primary.main",
+                },
+              }}
+            >
+              Create Account
+            </Button>
+            <Grid item>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  textAlign: "left",
+                  color: "#1e1e1e",
+                }}
+              >
+                Already have an account?{" "}
+                <Link
+                  onClick={() => {
+                    navigate(LOGIN)
                   }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography sx={{ color: "white" }}>Last Name</Typography>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  onChange={(e) => setLastName(e.target.value)}
-                  variant="outlined"
                   sx={{
-                    backgroundColor: "white",
-                    height: "3.5rem",
-                    borderRadius: "0.3rem",
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography sx={{ color: "white" }}>Email</Typography>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  onChange={(e) => setEmail(e.target.value)}
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "white",
-                    height: "3.5rem",
-                    borderRadius: "0.3rem",
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Typography sx={{ color: "white" }}>Password</Typography>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  sx={{
-                    backgroundColor: "white",
-                    height: "3.5rem",
-                    borderRadius: "0.3rem",
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  type="submit"
-                  fullWidth
-                  disabled={!(email.length > 0 && password.length > 0)}
-                  sx={{
-                    mt: 3,
-                    mb: 2,
-                    backgroundColor: "white",
-                    color: "black",
-                    height: "3.5rem",
-                    border: "3px solid black",
-                    borderRadius: "5px",
+                    color: "#88CF9F",
+                    textDecoration: "none",
                     "&:hover": {
-                      backgroundColor: "white",
-                      color: "primary.main",
+                      textDecoration: "underline",
                     },
                   }}
                 >
-                  Register
-                </Button>
-              </Grid>
+                  <b>Login.</b>
+                </Link>
+              </Typography>
             </Grid>
-          </Box>
-        </Paper>
-        <Typography
-          variant="h5"
-          sx={{
-            textAlign: "center",
-            color: "white",
-            ml: "auto",
-            mr: "auto",
-            mt: "5vh",
-            width: "30rem",
-          }}
-        >
-          Already have an account?{" "}
-          <Link
-            onClick={() => {
-              navigate(LOGIN)
-            }}
-            sx={{
-              color: "white",
-              textDecoration: "none",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
-          >
-            <b>Login here.</b>
-          </Link>
-        </Typography>
-      </Container>
-    </div>
+          </Grid>
+        </Grid>
+      </Paper>
+    </Container>
   )
 }
 
