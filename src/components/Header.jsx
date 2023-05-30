@@ -39,7 +39,7 @@ const Header = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar sx={{ height: "12vh" }}>
+        <Toolbar sx={{ height: "5vh" }}>
           <Logo />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             fruit salad
