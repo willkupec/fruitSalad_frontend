@@ -9,7 +9,6 @@ import PersonIcon from "@mui/icons-material/Person"
 import LocalMallIcon from "@mui/icons-material/LocalMall"
 import MenuItem from "@mui/material/MenuItem"
 import Menu from "@mui/material/Menu"
-import Logo from "./icons/Logo"
 import { LOGIN } from "../constants/frontend_routes"
 
 const Header = () => {
@@ -40,7 +39,6 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ height: "5vh" }}>
-          <Logo />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             fruit salad
           </Typography>
