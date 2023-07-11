@@ -17,7 +17,7 @@ const Home = () => (
         backgroundColor: "#fcdf23",
       }}
     >
-      <Box component="img" src={banner} alt="banner" width={"1400px"} />
+      <Box component="img" src={banner} alt="banner" width={"1500px"} />
     </Box>
     <Grid
       container
