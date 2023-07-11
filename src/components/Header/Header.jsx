@@ -9,7 +9,7 @@ import PersonIcon from "@mui/icons-material/Person"
 import LocalMallIcon from "@mui/icons-material/LocalMall"
 import MenuItem from "@mui/material/MenuItem"
 import Menu from "@mui/material/Menu"
-import { LOGIN } from "../constants/frontend_routes"
+import { LOGIN } from "../../constants/frontend_routes"
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
