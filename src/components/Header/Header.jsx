@@ -14,8 +14,6 @@ const Header = () => {
   const navigate = useNavigate()
   const { userData, setUserData } = useContext(UserContext)
 
-  console.log(userData)
-
   const handleMenu = (event) => {
     if (!userData) {
       setAnchorEl(null)
