@@ -8,7 +8,6 @@ const onClick = () => {
 const CartItem = ({ src, alt, width, title, price }) => (
   <>
     <Paper
-      backgroundColor="white"
       elevation={10}
       onClick={onClick}
       sx={{

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import AppBar from "@mui/material/AppBar"
 import { Box, Grid, Toolbar, Menu, MenuItem } from "@mui/material"
@@ -6,26 +6,31 @@ import IconButton from "@mui/material/IconButton"
 import PersonIcon from "@mui/icons-material/Person"
 import LocalMallIcon from "@mui/icons-material/LocalMall"
 import fruitsalad_title from "../../components/assets/fruitsalad_title.png"
-import { LOGIN } from "../../constants/frontend_routes"
+import { HOME, LOGIN, REGISTRATION } from "../../constants/frontend_routes"
+import UserContext from "../../context/UserContext"
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const navigate = useNavigate()
+  const { userData, setUserData } = useContext(UserContext)
+
+  console.log(userData)
 
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget)
+    if (!userData) {
+      setAnchorEl(null)
+      navigate(LOGIN)
+    } else setAnchorEl(event.currentTarget)
   }
 
   const handleAccountButton = () => {
     setAnchorEl(null)
-    //if not logged in, navigate to login page
-    navigate(LOGIN)
-    //if logged in, navigate to account page
+    navigate(REGISTRATION)
   }
 
   const logout = () => {
-    //TODO
-    //navigate user to home page
+    setUserData(null)
+    navigate(HOME)
   }
 
   const openCart = () => {
@@ -76,25 +81,27 @@ const Header = () => {
                   </IconButton>
                 </Grid>
               </Grid>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
-              >
-                {/* //TODO adjust text depending on if user is logged in */}
-                <MenuItem onClick={handleAccountButton}>My account</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
-              </Menu>
+              {userData && (
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={() => setAnchorEl(null)}
+                >
+                  {/* //TODO adjust text depending on if user is logged in */}
+                  <MenuItem onClick={handleAccountButton}>My account</MenuItem>
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </Menu>
+              )}
             </Box>
           </Grid>
         </Toolbar>
