@@ -48,14 +48,13 @@ const Registration = () => {
   }
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="md" sx={{display: "flex", alignItems: "center", justifySelf: "center"}}>
       <Paper
         component="form"
         onSubmit={handleRegister}
         noValidate
         elevation={24}
         sx={{
-          mt: "10%",
           borderRadius: "30px",
           width: 900,
           height: 700,
@@ -96,7 +95,6 @@ const Registration = () => {
               onChange={(e) => setFirstName(e.target.value)}
               variant="outlined"
               sx={{
-                backgroundColor: "white",
                 height: "3.5rem",
                 borderRadius: "5px",
                 ".MuiInputLabel-root": {
@@ -104,12 +102,6 @@ const Registration = () => {
                 },
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&.Mui-focused fieldset": {
                     borderColor: "#1e1e1e",
                   },
                 },
@@ -128,7 +120,6 @@ const Registration = () => {
               onChange={(e) => setLastName(e.target.value)}
               variant="outlined"
               sx={{
-                backgroundColor: "white",
                 height: "3.5rem",
                 borderRadius: "5px",
                 ".MuiInputLabel-root": {
@@ -136,12 +127,6 @@ const Registration = () => {
                 },
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&.Mui-focused fieldset": {
                     borderColor: "#1e1e1e",
                   },
                 },
@@ -160,7 +145,6 @@ const Registration = () => {
               onChange={(e) => setEmail(e.target.value)}
               variant="outlined"
               sx={{
-                backgroundColor: "white",
                 height: "3.5rem",
                 borderRadius: "5px",
                 ".MuiInputLabel-root": {
@@ -168,12 +152,6 @@ const Registration = () => {
                 },
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&.Mui-focused fieldset": {
                     borderColor: "#1e1e1e",
                   },
                 },
@@ -192,14 +170,15 @@ const Registration = () => {
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
               sx={{
-                backgroundColor: "white",
                 height: "3.5rem",
                 borderRadius: "5px",
                 ".MuiInputLabel-root": {
                   color: "#1e1e1e",
                 },
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#1e1e1e",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
                 },
               }}
             />

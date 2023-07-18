@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Typography } from "@mui/material"
+import { Box, Paper, Typography } from "@mui/material"
 
 const onClick = () => {
   console.log("clicked")
@@ -7,12 +7,13 @@ const onClick = () => {
 
 const CartItem = ({ src, alt, width, title, price }) => (
   <>
-    <Box
+    <Paper
       backgroundColor="white"
-      width={"520px"}
-      height={"663px"}
+      elevation={10}
       onClick={onClick}
       sx={{
+        width: "520px",
+        height: "663px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -25,7 +26,7 @@ const CartItem = ({ src, alt, width, title, price }) => (
       }}
     >
       <Box component="img" src={src} alt={alt} width={width}></Box>
-    </Box>
+    </Paper>
     <Typography variant="h6" align="center" color="#363333">
       {title}
     </Typography>

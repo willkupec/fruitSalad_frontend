@@ -105,7 +105,6 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               variant="outlined"
               sx={{
-                backgroundColor: "white",
                 height: "3.5rem",
                 borderRadius: "5px",
                 ".MuiInputLabel-root": {
@@ -113,12 +112,6 @@ const Login = () => {
                 },
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#1e1e1e",
-                  },
-                  "&.Mui-focused fieldset": {
                     borderColor: "#1e1e1e",
                   },
                 },
@@ -143,8 +136,10 @@ const Login = () => {
                 ".MuiInputLabel-root": {
                   color: "#1e1e1e",
                 },
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#1e1e1e",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#1e1e1e",
+                  },
                 },
               }}
             />
