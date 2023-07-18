@@ -15,6 +15,7 @@ const Home = () => (
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#fcdf23",
+        width: "100vw"
       }}
     >
       <Box component="img" src={banner} alt="banner" width={"1500px"} />
