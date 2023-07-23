@@ -9,8 +9,8 @@ import {
   Grid,
   Paper,
 } from "@mui/material"
-import { HOME, REGISTRATION } from "../../constants/frontend_routes"
-import { LOGIN_API } from "../../constants/api_routes"
+import { HOME, REGISTRATION } from "../../constants/routes/frontend_routes"
+import { LOGIN_API } from "../../constants/routes/api_routes"
 import UserContext from "../../context/UserContext"
 
 const loginUser = async (credentials) => {

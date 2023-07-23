@@ -15,7 +15,7 @@ const Home = () => (
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#fcdf23",
-        width: "100vw"
+        width: "100vw",
       }}
     >
       <Box component="img" src={banner} alt="banner" width={"1500px"} />
@@ -29,6 +29,7 @@ const Home = () => (
     >
       <Grid item>
         <CartItem
+          id={1}
           src={shirt_90s}
           alt="shirt_90s"
           width="520px"
@@ -38,6 +39,7 @@ const Home = () => (
       </Grid>
       <Grid item>
         <CartItem
+          id={2}
           src={corderoy_jacket}
           alt="corderoy_jacket"
           width="452px"
@@ -47,6 +49,7 @@ const Home = () => (
       </Grid>
       <Grid item>
         <CartItem
+          id={3}
           src={clown_sweater}
           alt="clown_sweater"
           title="The Lovers Sweater"
@@ -55,6 +58,7 @@ const Home = () => (
       </Grid>
       <Grid item>
         <CartItem
+          id={4}
           src={patchwork_jacket}
           alt="patchwork_jacket"
           title="Patchwork Button-Up Jacket"

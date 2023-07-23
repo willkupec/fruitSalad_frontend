@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton"
 import PersonIcon from "@mui/icons-material/Person"
 import LocalMallIcon from "@mui/icons-material/LocalMall"
 import fruitsalad_title from "../../components/assets/fruitsalad_title.png"
-import { HOME, LOGIN, REGISTRATION } from "../../constants/frontend_routes"
+import { HOME, LOGIN, REGISTRATION } from "../../constants/routes/frontend_routes"
 import UserContext from "../../context/UserContext"
 
 const Header = () => {
