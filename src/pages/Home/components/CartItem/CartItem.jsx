@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom"
 import { Box, Paper, Typography } from "@mui/material"
 import { CART_ITEM } from "../../../../constants/routes/frontend_routes"
 
-const CartItem = ({ id, src, alt, width, title, price }) => {
+const CartItem = ({ cartItem, isInspect }) => {
   const navigate = useNavigate()
+  const { id, src, alt, width, title, price } = cartItem
 
   const onClick = () => {
     navigate(`${CART_ITEM}/${id}`)
@@ -31,12 +32,12 @@ const CartItem = ({ id, src, alt, width, title, price }) => {
       >
         <Box component="img" src={src} alt={alt} width={width}></Box>
       </Paper>
-      <Typography variant="h6" align="center" color="#363333">
-        {title}
-      </Typography>
-      <Typography variant="h6" align="center" color="#363333">
-        €{price}
-      </Typography>
+          <Typography variant="h6" align="center" color="#363333">
+            {title}
+          </Typography>
+          <Typography variant="h6" align="center" color="#363333">
+            €{price}
+          </Typography>
     </>
   )
 }
