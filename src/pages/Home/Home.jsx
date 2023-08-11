@@ -7,6 +7,36 @@ import patchwork_jacket from "../../assets/patchwork_jacket.jpg"
 import { Box, Grid } from "@mui/material"
 import CartItem from "./components/CartItem/CartItem"
 
+const cartItem1 = {
+  src: shirt_90s,
+  alt: "shirt_90s",
+  width: "520px",
+  title: "90s Pastel Striped Shirt",
+  price: 40,
+}
+
+const cartItem2 = {
+  src: corderoy_jacket,
+  alt: "corderoy_jacket",
+  width: "452px",
+  title: "Black Long-Sleeve Corderoy Shirt",
+  price: 45,
+}
+
+const cartItem3 = {
+  src: clown_sweater,
+  alt: "clown_sweater",
+  title: "The Lovers Sweater",
+  price: 50,
+}
+
+const cartItem4 = {
+  src: patchwork_jacket,
+  alt: "patchwork_jacket",
+  title: "Patchwork Button-Up Jacket",
+  price: 70,
+}
+
 const Home = () => (
   <>
     <Box
@@ -15,7 +45,7 @@ const Home = () => (
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#fcdf23",
-        width: "100vw"
+        width: "100vw",
       }}
     >
       <Box component="img" src={banner} alt="banner" width={"1500px"} />
@@ -28,38 +58,16 @@ const Home = () => (
       sx={{ pt: 10 }}
     >
       <Grid item>
-        <CartItem
-          src={shirt_90s}
-          alt="shirt_90s"
-          width="520px"
-          title="90s Pastel Striped Shirt"
-          price={40}
-        />
+        <CartItem cartItem={cartItem1} />
       </Grid>
       <Grid item>
-        <CartItem
-          src={corderoy_jacket}
-          alt="corderoy_jacket"
-          width="452px"
-          title="Black Long-Sleeve Corderoy Shirt"
-          price={45}
-        />
+        <CartItem cartItem={cartItem2} />
       </Grid>
       <Grid item>
-        <CartItem
-          src={clown_sweater}
-          alt="clown_sweater"
-          title="The Lovers Sweater"
-          price={50}
-        />
+        <CartItem cartItem={cartItem3} />
       </Grid>
       <Grid item>
-        <CartItem
-          src={patchwork_jacket}
-          alt="patchwork_jacket"
-          title="Patchwork Button-Up Jacket"
-          price={70}
-        />
+        <CartItem cartItem={cartItem4} />
       </Grid>
     </Grid>
   </>
