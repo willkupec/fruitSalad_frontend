@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import { HOME, LOGIN } from "../../constants/frontend_routes"
 import { REGISTRATION_API } from "../../constants/api_routes"
-import UserContext from "../../context/UserContext"
+import UserContext from "../../context/UserContext/UserContext"
 
 const registerUser = async (credentials) => {
   return fetch(REGISTRATION_API, {

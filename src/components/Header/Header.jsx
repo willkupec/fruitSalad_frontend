@@ -5,9 +5,9 @@ import { Box, Grid, Toolbar, Menu, MenuItem } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import PersonIcon from "@mui/icons-material/Person"
 import LocalMallIcon from "@mui/icons-material/LocalMall"
-import fruitsalad_title from "../../components/assets/fruitsalad_title.png"
+import fruitsalad_title from "../../assets/fruitsalad_title.png"
 import { HOME, LOGIN, REGISTRATION } from "../../constants/frontend_routes"
-import UserContext from "../../context/UserContext"
+import UserContext from "../../context/UserContext/UserContext"
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
