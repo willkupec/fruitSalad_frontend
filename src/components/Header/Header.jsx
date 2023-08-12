@@ -51,7 +51,9 @@ const Header = () => {
                 component="img"
                 src={fruitsalad_title}
                 alt="fruitsalad_title"
-                width={"200px"}
+                width="200px"
+                onClick={() => navigate(HOME)}
+                sx={{ cursor: "pointer" }}
               />
             </Grid>
             <Box>
