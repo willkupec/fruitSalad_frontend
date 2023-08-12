@@ -18,8 +18,6 @@ const Cart = () => {
     setCart(cart.filter((c) => c.id !== cartItem.id))
   }
 
-  console.log(!isEmpty(cart))
-
   const cartContent = map(cart, (item) => (
     <Box key={item.id}>
       <Box display="flex" sx={{ pt: 2, pb: 2, ml: 2 }} alignItems="start">

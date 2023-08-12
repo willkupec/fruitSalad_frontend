@@ -9,7 +9,6 @@ const CartItem = ({ cartItem }) => {
     <>
       <Paper
         elevation={10}
-        // onClick={onClick}
         sx={{
           width: "520px",
           height: "663px",
@@ -21,7 +20,6 @@ const CartItem = ({ cartItem }) => {
           "&:hover": {
             transform: "scale(0.95)",
           },
-          // cursor: "pointer",
         }}
       >
         <Box component="img" src={src} alt={alt} width={width}></Box>

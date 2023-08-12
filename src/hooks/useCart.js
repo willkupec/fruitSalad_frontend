@@ -8,10 +8,6 @@ const useCart = (cartItem) => {
     setCart((c) => [...c, cartItem])
   }
 
-/*   const removeFromCart = () => {
-    setCart(cart.filter((c) => c.id !== cartItem.id))
-  } */
-
   return { addToCart }
 }
 export default useCart
