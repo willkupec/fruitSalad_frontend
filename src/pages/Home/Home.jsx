@@ -8,6 +8,7 @@ import { Box, Grid } from "@mui/material"
 import CartItem from "./components/CartItem/CartItem"
 
 const cartItem1 = {
+  id: 1,
   src: shirt_90s,
   alt: "shirt_90s",
   width: "520px",
@@ -16,6 +17,7 @@ const cartItem1 = {
 }
 
 const cartItem2 = {
+  id: 2,
   src: corderoy_jacket,
   alt: "corderoy_jacket",
   width: "452px",
@@ -24,6 +26,7 @@ const cartItem2 = {
 }
 
 const cartItem3 = {
+  id: 3,
   src: clown_sweater,
   alt: "clown_sweater",
   title: "The Lovers Sweater",
@@ -31,6 +34,7 @@ const cartItem3 = {
 }
 
 const cartItem4 = {
+  id: 4,
   src: patchwork_jacket,
   alt: "patchwork_jacket",
   title: "Patchwork Button-Up Jacket",

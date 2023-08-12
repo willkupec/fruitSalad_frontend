@@ -2,10 +2,6 @@ import React from "react"
 import { Box, Paper, Typography, Button } from "@mui/material"
 import useCart from "../../../../hooks/useCart"
 
-const onClick = () => {
-  console.log("clicked")
-}
-
 const CartItem = ({ cartItem }) => {
   const { src, alt, width, title, price } = cartItem
   const { addToCart } = useCart(cartItem)
@@ -39,7 +35,7 @@ const CartItem = ({ cartItem }) => {
       <Button
         variant="contained"
         size="large"
-        onClick={onClick}
+        onClick={addToCart}
         sx={{
           display: "flex",
           ml: "auto",

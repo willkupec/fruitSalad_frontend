@@ -8,11 +8,13 @@ import LocalMallIcon from "@mui/icons-material/LocalMall"
 import fruitsalad_title from "../../assets/fruitsalad_title.png"
 import { HOME, LOGIN, REGISTRATION } from "../../constants/frontend_routes"
 import UserContext from "../../context/UserContext/UserContext"
+import CartContext from "../../context/CartContext/CartContext"
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const navigate = useNavigate()
   const { userData, setUserData } = useContext(UserContext)
+  const { setShowCart } = useContext(CartContext)
 
   const handleMenu = (event) => {
     if (!userData) {
@@ -32,7 +34,7 @@ const Header = () => {
   }
 
   const openCart = () => {
-    //TODO opens cart on side of screen, fixed to side
+    setShowCart(true)
   }
 
   return (
