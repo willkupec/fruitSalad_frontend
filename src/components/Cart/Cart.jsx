@@ -8,6 +8,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material"
+import { map, isEmpty } from "lodash"
 import CloseIcon from "@mui/icons-material/Close"
 import CartContext from "../../context/CartContext/CartContext"
 
@@ -17,7 +18,9 @@ const Cart = () => {
     setCart(cart.filter((c) => c.id !== cartItem.id))
   }
 
-  const cartContent = cart.map((item) => (
+  console.log(!isEmpty(cart))
+
+  const cartContent = map(cart, (item) => (
     <Box key={item.id}>
       <Box display="flex" sx={{ pt: 2, pb: 2, ml: 2 }} alignItems="start">
         <Avatar
@@ -69,7 +72,7 @@ const Cart = () => {
         </Typography>
       </Box>
       {cartContent}
-      <Button variant="contained">Checkout</Button>
+      {!isEmpty(cart) && <Button variant="contained">Checkout</Button>}
     </Drawer>
   )
 }
