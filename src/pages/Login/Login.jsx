@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import { HOME, REGISTRATION } from "../../constants/frontend_routes"
 import { LOGIN_API } from "../../constants/api_routes"
-import UserContext from "../../context/UserContext"
+import UserContext from "../../context/UserContext/UserContext"
 
 const loginUser = async (credentials) => {
   console.log(JSON.stringify(credentials))

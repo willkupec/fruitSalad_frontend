@@ -5,18 +5,23 @@ import Registration from "./pages/Registration/Registration"
 import Home from "./pages/Home/Home"
 import { LOGIN, REGISTRATION } from "./constants/frontend_routes"
 import Header from "./components/Header/Header"
-import UserProvider from "./context/UserProvider"
+import UserProvider from "./context/UserContext/UserProvider"
+import CartProvider from "./context/CartContext/CartProvider"
+import Cart from "./components/Cart/Cart"
 
 const App = () => {
   const location = useLocation()
   return (
     <UserProvider>
-      <Header />
-      <Routes location={location}>
-        <Route path={"*"} element={<Home />} />
-        <Route path={LOGIN} element={<Login />} />
-        <Route path={REGISTRATION} element={<Registration />} />
-      </Routes>
+      <CartProvider>
+        <Cart />
+        <Header />
+        <Routes location={location}>
+          <Route path={"*"} element={<Home />} />
+          <Route path={LOGIN} element={<Login />} />
+          <Route path={REGISTRATION} element={<Registration />} />
+        </Routes>
+      </CartProvider>
     </UserProvider>
   )
 }

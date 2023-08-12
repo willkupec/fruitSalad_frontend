@@ -5,14 +5,16 @@ import { Box, Grid, Toolbar, Menu, MenuItem } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import PersonIcon from "@mui/icons-material/Person"
 import LocalMallIcon from "@mui/icons-material/LocalMall"
-import fruitsalad_title from "../../components/assets/fruitsalad_title.png"
+import fruitsalad_title from "../../assets/fruitsalad_title.png"
 import { HOME, LOGIN, REGISTRATION } from "../../constants/frontend_routes"
-import UserContext from "../../context/UserContext"
+import UserContext from "../../context/UserContext/UserContext"
+import CartContext from "../../context/CartContext/CartContext"
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const navigate = useNavigate()
   const { userData, setUserData } = useContext(UserContext)
+  const { setShowCart } = useContext(CartContext)
 
   const handleMenu = (event) => {
     if (!userData) {
@@ -32,7 +34,7 @@ const Header = () => {
   }
 
   const openCart = () => {
-    //TODO opens cart on side of screen, fixed to side
+    setShowCart(true)
   }
 
   return (
@@ -49,7 +51,9 @@ const Header = () => {
                 component="img"
                 src={fruitsalad_title}
                 alt="fruitsalad_title"
-                width={"200px"}
+                width="200px"
+                onClick={() => navigate(HOME)}
+                sx={{ cursor: "pointer" }}
               />
             </Grid>
             <Box>
