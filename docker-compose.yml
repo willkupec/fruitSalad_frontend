@@ -1,0 +1,13 @@
+version: "1.0"
+
+services:
+  app:
+    container_name: Frontend
+    image: fruitsalad_frontend_image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+    ports:
+      - 8080:80
