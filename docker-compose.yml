@@ -1,0 +1,10 @@
+version: "1.0"
+
+services:
+  app:
+    container_name: Frontend
+    image: fruitsalad_frontend_image
+    build:
+      context: .
+    ports:
+      - 8080:80
