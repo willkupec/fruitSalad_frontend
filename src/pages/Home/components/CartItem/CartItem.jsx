@@ -3,7 +3,6 @@ import { Box, Paper, Typography, Button } from "@mui/material"
 import useCart from "../../../../hooks/useCart"
 
 const CartItem = ({ cartItem }) => {
-  console.log(cartItem)
   const { src, title, price } = cartItem
   const { addToCart } = useCart(cartItem)
   return (
