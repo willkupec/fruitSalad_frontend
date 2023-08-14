@@ -1,16 +1,12 @@
 import React from "react"
 import banner from "../../assets/temp_banner.jpg"
-import shirt_90s from "../../assets/90s_shirt.jpg"
-import clown_sweater from "../../assets/clown_sweater.jpg"
-import corderoy_jacket from "../../assets/corderoy_jacket.jpg"
-import patchwork_jacket from "../../assets/patchwork_jacket.jpg"
 import { Box, Grid } from "@mui/material"
 import CartItem from "./components/CartItem/CartItem"
 
 const cartItem1 = {
   id: 1,
-  src: shirt_90s,
-  alt: "shirt_90s",
+  src: "https://i.imgur.com/ssYPbf4.jpg",
+  alt: "90s Pastel Striped Shirt",
   width: "520px",
   title: "90s Pastel Striped Shirt",
   price: 40,
@@ -18,8 +14,8 @@ const cartItem1 = {
 
 const cartItem2 = {
   id: 2,
-  src: corderoy_jacket,
-  alt: "corderoy_jacket",
+  src: "https://i.imgur.com/y5TlUBz.jpg",
+  alt: "Black Long-Sleeve Corderoy Shirt",
   width: "452px",
   title: "Black Long-Sleeve Corderoy Shirt",
   price: 45,
@@ -27,16 +23,16 @@ const cartItem2 = {
 
 const cartItem3 = {
   id: 3,
-  src: clown_sweater,
-  alt: "clown_sweater",
+  src: "https://i.imgur.com/M5Q5CSQ.jpg",
+  alt: "The Lovers Sweater",
   title: "The Lovers Sweater",
   price: 50,
 }
 
 const cartItem4 = {
   id: 4,
-  src: patchwork_jacket,
-  alt: "patchwork_jacket",
+  src: "https://i.imgur.com/VJSprtt.jpg",
+  alt: "Patchwork Button-Up Jacket",
   title: "Patchwork Button-Up Jacket",
   price: 70,
 }
