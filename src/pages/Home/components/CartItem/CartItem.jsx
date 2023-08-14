@@ -3,7 +3,7 @@ import { Box, Paper, Typography, Button } from "@mui/material"
 import useCart from "../../../../hooks/useCart"
 
 const CartItem = ({ cartItem }) => {
-  const { src, alt, width, title, price } = cartItem
+  const { src, title, price } = cartItem
   const { addToCart } = useCart(cartItem)
   return (
     <>
@@ -22,7 +22,7 @@ const CartItem = ({ cartItem }) => {
           },
         }}
       >
-        <Box component="img" src={src} alt={alt} width={width}></Box>
+        <Box component="img" src={src} alt={title} width={"520px"}></Box>
       </Paper>
       <Typography variant="h6" align="center" color="#363333">
         {title}
