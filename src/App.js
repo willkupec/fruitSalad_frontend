@@ -5,7 +5,7 @@ import Registration from "./pages/Registration/Registration"
 import Home from "./pages/Home/Home"
 import { ReactKeycloakProvider } from "@react-keycloak/web"
 import keycloak from "./Keycloak"
-import { LOGIN, REGISTRATION } from "./constants/frontend_routes"
+import { CHECKOUT, LOGIN, REGISTRATION } from "./constants/frontend_routes"
 import Header from "./components/Header/Header"
 import UserProvider from "./context/UserContext/UserProvider"
 import CartProvider from "./context/CartContext/CartProvider"
@@ -23,11 +23,12 @@ const App = () => {
           <Routes location={location}>
             <Route path={"*"} element={<Home />} />
             <Route path={LOGIN} element={<Login />} />
+            <Route path={REGISTRATION} element={<Registration />} />
             <Route
-              path={REGISTRATION}
+              path={CHECKOUT}
               element={
                 <PrivateRoute>
-                  <Registration />
+                  <div />
                 </PrivateRoute>
               }
             />
