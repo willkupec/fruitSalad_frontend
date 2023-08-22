@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useKeycloak } from "@react-keycloak/web";
 import AppBar from "@mui/material/AppBar"
 import { Box, Grid, Toolbar, Menu, MenuItem } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
@@ -13,13 +14,15 @@ import CartContext from "../../context/CartContext/CartContext"
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const navigate = useNavigate()
+  const { keycloak } = useKeycloak();
   const { userData, setUserData } = useContext(UserContext)
   const { setShowCart } = useContext(CartContext)
 
   const handleMenu = (event) => {
     if (!userData) {
       setAnchorEl(null)
-      navigate(LOGIN)
+      // navigate(LOGIN)
+      keycloak.login()
     } else setAnchorEl(event.currentTarget)
   }
 
@@ -30,7 +33,8 @@ const Header = () => {
 
   const logout = () => {
     setUserData(null)
-    navigate(HOME)
+    // navigate(HOME)
+    keycloak.logout()
   }
 
   const openCart = () => {
