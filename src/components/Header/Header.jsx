@@ -1,35 +1,30 @@
 import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useKeycloak } from "@react-keycloak/web"
 import AppBar from "@mui/material/AppBar"
 import { Box, Grid, Toolbar, Menu, MenuItem } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import PersonIcon from "@mui/icons-material/Person"
 import LocalMallIcon from "@mui/icons-material/LocalMall"
 import fruitsalad_title from "../../assets/fruitsalad_title.png"
-import { HOME, LOGIN, REGISTRATION } from "../../constants/frontend_routes"
-import UserContext from "../../context/UserContext/UserContext"
+import { HOME } from "../../constants/frontend_routes"
 import CartContext from "../../context/CartContext/CartContext"
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const navigate = useNavigate()
-  const { userData, setUserData } = useContext(UserContext)
+  const { keycloak } = useKeycloak()
   const { setShowCart } = useContext(CartContext)
 
   const handleMenu = (event) => {
-    if (!userData) {
+    if (!keycloak?.authenticated) {
       setAnchorEl(null)
-      navigate(LOGIN)
+      keycloak?.login()
     } else setAnchorEl(event.currentTarget)
   }
 
-  const handleAccountButton = () => {
-    setAnchorEl(null)
-    navigate(REGISTRATION)
-  }
-
   const logout = () => {
-    setUserData(null)
+    keycloak?.logout()
     navigate(HOME)
   }
 
@@ -83,7 +78,7 @@ const Header = () => {
                   </IconButton>
                 </Grid>
               </Grid>
-              {userData && (
+              {keycloak?.authenticated && (
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -99,8 +94,6 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={() => setAnchorEl(null)}
                 >
-                  {/* //TODO adjust text depending on if user is logged in */}
-                  <MenuItem onClick={handleAccountButton}>My account</MenuItem>
                   <MenuItem onClick={logout}>Logout</MenuItem>
                 </Menu>
               )}

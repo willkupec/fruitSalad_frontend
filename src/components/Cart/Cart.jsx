@@ -11,11 +11,18 @@ import {
 import { map, isEmpty } from "lodash"
 import CloseIcon from "@mui/icons-material/Close"
 import CartContext from "../../context/CartContext/CartContext"
+import { useNavigate } from "react-router"
+import { CHECKOUT } from "../../constants/frontend_routes"
 
 const Cart = () => {
   const { cart, setCart, showCart, setShowCart } = useContext(CartContext)
+  const navigate = useNavigate()
   const removeFromCart = (cartItem) => {
     setCart(cart.filter((c) => c.id !== cartItem.id))
+  }
+
+  const goToCheckout = () => {
+    navigate(CHECKOUT)
   }
 
   const cartContent = map(cart, (item) => (
@@ -70,7 +77,11 @@ const Cart = () => {
         </Typography>
       </Box>
       {cartContent}
-      {!isEmpty(cart) && <Button variant="contained">Checkout</Button>}
+      {!isEmpty(cart) && (
+        <Button variant="contained" onClick={goToCheckout}>
+          Checkout
+        </Button>
+      )}
     </Drawer>
   )
 }
