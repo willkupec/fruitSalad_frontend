@@ -1,8 +1,18 @@
-import { Autocomplete, Button, Grid, Paper, Typography } from "@mui/material"
+import {
+  Autocomplete,
+  Avatar,
+  Button,
+  Divider,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material"
 import FormTextField from "../../components/FormTextField/FormTextField"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { COUNTRIES_API } from "../../constants/api_routes"
-import { map } from "lodash"
+import { map, sumBy } from "lodash"
+import CartContext from "../../context/CartContext/CartContext"
+import { Box } from "@mui/system"
 
 const getCountries = async (setCountries) => {
   return fetch(COUNTRIES_API, {
@@ -17,6 +27,31 @@ const getCountries = async (setCountries) => {
 
 const Checkout = () => {
   const [countries, setCountries] = useState([])
+  const { cart } = useContext(CartContext)
+
+  const totalPrice = sumBy(cart, (item) => item.price)
+
+  console.log(totalPrice)
+
+  const cartContent = map(cart, (item) => (
+    <Box key={item.id}>
+      <Box display="flex" sx={{ pt: 2, pb: 2, ml: 2 }} alignItems="start">
+        <Avatar
+          src={item.src}
+          sx={{ width: 45, height: 45, mr: 2, borderRadius: 0 }}
+        />
+        <Grid container justifyContent="space-between" sx={{ pr: 5, pt: 1 }}>
+          <Grid item>
+            <Typography variant="body2">{item.title}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1">€{item.price}</Typography>
+          </Grid>
+        </Grid>
+      </Box>
+      <Divider />
+    </Box>
+  ))
 
   useEffect(() => {
     getCountries(setCountries)
@@ -68,25 +103,30 @@ const Checkout = () => {
               </Typography>
               <FormTextField label="Name / Company Name" required />
             </Grid>
-            <Grid container item xs={12}>
-              <Grid item xs>
+            <Grid container item spacing={2} xs={12}>
+              <Grid item xs={9}>
                 <FormTextField label="Address" required />
               </Grid>
-              <Grid item>
+              <Grid item xs={3}>
                 <FormTextField label="Apt, suite, etc." />
               </Grid>
             </Grid>
             <Grid item xs={12}>
               <FormTextField label="City" required />
             </Grid>
-            <Grid item xs={12}>
-              <Autocomplete
-                disablePortal
-                options={countries}
-                renderInput={(params) => (
-                  <FormTextField {...params} label="Country" />
-                )}
-              />
+            <Grid container item spacing={2} xs={12}>
+              <Grid item xs={6}>
+                <Autocomplete
+                  disablePortal
+                  options={countries}
+                  renderInput={(params) => (
+                    <FormTextField {...params} label="Country" />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <FormTextField label="Postal Code" required />
+              </Grid>
             </Grid>
             <Grid item xs={12}>
               <Button
@@ -122,12 +162,10 @@ const Checkout = () => {
             width: "100%",
             height: "100%",
             backgroundColor: "#e0e0e0",
-            pl: "5rem",
-            pr: "5rem",
-            pt: "5rem",
-            mr: "2rem",
           }}
-        ></Paper>
+        >
+          {cartContent}
+        </Paper>
       </Grid>
     </Grid>
   )
