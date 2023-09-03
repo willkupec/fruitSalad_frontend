@@ -1,7 +1,27 @@
-import { Button, Grid, Paper, Typography } from "@mui/material"
+import { Autocomplete, Button, Grid, Paper, Typography } from "@mui/material"
 import FormTextField from "../../components/FormTextField/FormTextField"
+import { useEffect, useState } from "react"
+import { COUNTRIES_API } from "../../constants/api_routes"
+import { map } from "lodash"
+
+const getCountries = async (setCountries) => {
+  return fetch(COUNTRIES_API, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => setCountries(map(data, (country) => country.name.common)))
+}
 
 const Checkout = () => {
+  const [countries, setCountries] = useState([])
+
+  useEffect(() => {
+    getCountries(setCountries)
+  }, [])
+
   return (
     <Grid
       container
@@ -58,6 +78,15 @@ const Checkout = () => {
             </Grid>
             <Grid item xs={12}>
               <FormTextField label="City" required />
+            </Grid>
+            <Grid item xs={12}>
+              <Autocomplete
+                disablePortal
+                options={countries}
+                renderInput={(params) => (
+                  <FormTextField {...params} label="Country" />
+                )}
+              />
             </Grid>
             <Grid item xs={12}>
               <Button
