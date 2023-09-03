@@ -13,16 +13,22 @@ import CloseIcon from "@mui/icons-material/Close"
 import CartContext from "../../context/CartContext/CartContext"
 import { useNavigate } from "react-router"
 import { CHECKOUT } from "../../constants/frontend_routes"
+import { useKeycloak } from "@react-keycloak/web"
 
 const Cart = () => {
   const { cart, setCart, showCart, setShowCart } = useContext(CartContext)
   const navigate = useNavigate()
+  const { keycloak } = useKeycloak()
   const removeFromCart = (cartItem) => {
     setCart(cart.filter((c) => c.id !== cartItem.id))
   }
 
-  const goToCheckout = () => {
-    navigate(CHECKOUT)
+  const goToCheckout = () =>
+    keycloak.authenticated ? navigate(CHECKOUT) : keycloak?.login()
+
+  const checkoutOnClick = () => {
+    setShowCart(false)
+    goToCheckout()
   }
 
   const cartContent = map(cart, (item) => (
@@ -78,7 +84,7 @@ const Cart = () => {
       </Box>
       {cartContent}
       {!isEmpty(cart) && (
-        <Button variant="contained" onClick={goToCheckout}>
+        <Button variant="contained" onClick={checkoutOnClick}>
           Checkout
         </Button>
       )}
