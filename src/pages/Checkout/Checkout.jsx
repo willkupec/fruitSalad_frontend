@@ -29,9 +29,9 @@ const Checkout = () => {
   const [countries, setCountries] = useState([])
   const { cart } = useContext(CartContext)
 
-  const totalPrice = sumBy(cart, (item) => item.price)
-
-  console.log(totalPrice)
+  const subTotalPrice = sumBy(cart, (item) => item.price)
+  const taxPrice = 4.35
+  const totalPrice = subTotalPrice + taxPrice
 
   const cartContent = map(cart, (item) => (
     <Box key={item.id}>
@@ -45,7 +45,7 @@ const Checkout = () => {
             <Typography variant="body2">{item.title}</Typography>
           </Grid>
           <Grid item>
-            <Typography variant="body1">€{item.price}</Typography>
+            <Typography variant="h6">€{item.price}</Typography>
           </Grid>
         </Grid>
       </Box>
@@ -165,6 +165,55 @@ const Checkout = () => {
           }}
         >
           {cartContent}
+          <Grid container justifyContent="space-between" sx={{pr: 5, pt: 2, pl: 2}}>
+            <Grid item>
+              <Typography variant="h6">
+                Subtotal
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h6">
+                {subTotalPrice}€
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid container justifyContent="space-between" sx={{pr: 5, pl: 2}}>
+            <Grid item>
+              <Typography variant="h6">
+                Tax
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h6">
+                {taxPrice}€
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid container justifyContent="space-between" sx={{pr: 5, pl: 2, pb: 2}}>
+            <Grid item>
+              <Typography variant="h6">
+                Shipping
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h6">
+                Free
+              </Typography>
+            </Grid>
+          </Grid>
+          <Divider />
+          <Grid container justifyContent="space-between" sx={{pr: 5, pl: 2, pt: 5}}>
+            <Grid item>
+              <Typography variant="h6">
+                Total
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h4">
+                {totalPrice}€
+              </Typography>
+            </Grid>
+          </Grid>
         </Paper>
       </Grid>
     </Grid>
