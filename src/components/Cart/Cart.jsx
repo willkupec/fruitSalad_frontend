@@ -3,17 +3,14 @@ import {
   Box,
   Typography,
   Drawer,
-  Avatar,
-  Divider,
   Button,
-  IconButton,
 } from "@mui/material"
-import { map, isEmpty } from "lodash"
-import CloseIcon from "@mui/icons-material/Close"
+import { isEmpty } from "lodash"
 import CartContext from "../../context/CartContext/CartContext"
 import { useNavigate } from "react-router"
 import { CHECKOUT } from "../../constants/frontend_routes"
 import { useKeycloak } from "@react-keycloak/web"
+import CartContent from "../CartContent/CartContent"
 
 const Cart = () => {
   const { cart, setCart, showCart, setShowCart } = useContext(CartContext)
@@ -30,33 +27,6 @@ const Cart = () => {
     setShowCart(false)
     goToCheckout()
   }
-
-  const cartContent = map(cart, (item) => (
-    <Box key={item.id}>
-      <Box display="flex" sx={{ pt: 2, pb: 2, ml: 2 }} alignItems="start">
-        <Avatar
-          src={item.src}
-          sx={{ width: 96, height: 96, mr: 2, borderRadius: 0 }}
-        />
-        <Box display="flex" flexDirection="column">
-          <Typography variant="h6">{item.title}</Typography>
-          <Typography variant="body1">€{item.price}</Typography>
-        </Box>
-        <IconButton
-          onClick={() => removeFromCart(item)}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            mt: "-0.2rem",
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <Divider />
-    </Box>
-  ))
 
   return (
     <Drawer
@@ -82,7 +52,7 @@ const Cart = () => {
           Cart
         </Typography>
       </Box>
-      {cartContent}
+      <CartContent cart={cart} removeFromCart={removeFromCart} />
       {!isEmpty(cart) && (
         <Button variant="contained" onClick={checkoutOnClick}>
           Checkout
