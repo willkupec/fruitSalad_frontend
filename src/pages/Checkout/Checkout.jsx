@@ -22,6 +22,7 @@ const getCountries = async (setCountries) => {
     },
   })
     .then((response) => response.json())
+    // maps names of countries
     .then((data) => setCountries(map(data, (country) => country.name.common)))
 }
 
