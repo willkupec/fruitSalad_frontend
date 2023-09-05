@@ -1,6 +1,75 @@
+import { Button, Grid, Paper, Typography } from "@mui/material"
+import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
+import FormTextField from "../../components/FormTextField/FormTextField"
 
 const Payment = () => {
-
+  return (
+    <Grid
+      container
+      direction={"row"}
+      columnSpacing={5}
+      sx={{ mt: "6.5%", ml: "1.5%", width: "95vw", height: "80vh" }}
+    >
+      <Grid item xs={7}>
+        <Paper
+          component="form"
+          noValidate
+          elevation={24}
+          sx={{
+            borderRadius: "30px",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "white",
+            pl: "5rem",
+            pr: "5rem",
+            pt: "2rem",
+          }}
+        >
+          <Grid
+            container
+            columnSpacing={1}
+            alignItems="center"
+            sx={{ width: "100%", height: "85%" }}
+          >
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                sx={{
+                  textAlign: "left",
+                  color: "#1e1e1e",
+                  fontWeight: "bold",
+                }}
+              >
+                PAYMENT
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                fullWidth
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: "#88CF9F",
+                  fontWeight: "bold",
+                  color: "white",
+                  height: "3.5rem",
+                  borderRadius: "5px",
+                  "&:hover": {
+                    backgroundColor: "black",
+                    color: "primary.main",
+                  },
+                }}
+              >
+                Complete Order
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Grid>
+      <CartContentCheckout />
+    </Grid>
+  )
 }
 
 export default Payment

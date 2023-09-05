@@ -1,7 +1,10 @@
 import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material"
 import { map, sumBy } from "lodash"
+import CartContext from "../../context/CartContext/CartContext"
+import { useContext } from "react"
 
-const CartContentCheckout = ({ cart }) => {
+const CartContentCheckout = () => {
+  const { cart } = useContext(CartContext)
   const subTotalPrice = sumBy(cart, (item) => item.price)
   const taxPrice = 4.35
   const totalPrice = subTotalPrice + taxPrice
