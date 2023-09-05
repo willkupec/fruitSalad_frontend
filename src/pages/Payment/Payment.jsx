@@ -29,7 +29,7 @@ const Payment = () => {
             container
             columnSpacing={1}
             alignItems="center"
-            sx={{ width: "100%", height: "85%" }}
+            sx={{ width: "100%", height: "70%" }}
           >
             <Grid item xs={12}>
               <Typography
@@ -42,6 +42,49 @@ const Payment = () => {
               >
                 PAYMENT
               </Typography>
+            </Grid>
+            <Grid item xs={12}></Grid>
+            <Grid container item spacing={3}>
+              <Grid item xs={12}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    textAlign: "left",
+                    color: "#1e1e1e",
+                  }}
+                >
+                  Credit Card Info
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormTextField
+                  required
+                  label="Name on card"
+                  autoComplete="cc-name"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormTextField
+                  required
+                  label="Card number"
+                  autoComplete="cc-number"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormTextField
+                  required
+                  label="Expiry date"
+                  autoComplete="cc-exp"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormTextField
+                  required
+                  label="CVV"
+                  helperText="Last three digits on signature strip"
+                  autoComplete="cc-csc"
+                />
+              </Grid>
             </Grid>
             <Grid item xs={12}>
               <Button
