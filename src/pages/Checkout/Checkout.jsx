@@ -1,58 +1,34 @@
-import {
-  Autocomplete,
-  Avatar,
-  Button,
-  Divider,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material"
+import { Autocomplete, Button, Grid, Paper, Typography } from "@mui/material"
 import FormTextField from "../../components/FormTextField/FormTextField"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { COUNTRIES_API } from "../../constants/api_routes"
-import { map, sumBy } from "lodash"
-import CartContext from "../../context/CartContext/CartContext"
-import { Box } from "@mui/system"
+import { PAYMENT } from "../../constants/frontend_routes"
+import { map } from "lodash"
+import { useNavigate } from "react-router-dom"
+import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
 
 const getCountries = async (setCountries) => {
-  return fetch(COUNTRIES_API, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    // maps names of countries
-    .then((data) => setCountries(map(data, (country) => country.name.common)))
+  return (
+    fetch(COUNTRIES_API, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      // maps names of countries
+      .then((data) => setCountries(map(data, (country) => country.name.common)))
+  )
 }
 
 const Checkout = () => {
   const [countries, setCountries] = useState([])
-  const { cart } = useContext(CartContext)
 
-  const subTotalPrice = sumBy(cart, (item) => item.price)
-  const taxPrice = 4.35
-  const totalPrice = subTotalPrice + taxPrice
+  const navigate = useNavigate()
 
-  const cartContent = map(cart, (item) => (
-    <Box key={item.id}>
-      <Box display="flex" sx={{ pt: 2, pb: 2, ml: 2 }} alignItems="start">
-        <Avatar
-          src={item.src}
-          sx={{ width: 45, height: 45, mr: 2, borderRadius: 0 }}
-        />
-        <Grid container justifyContent="space-between" sx={{ pr: 5, pt: 1 }}>
-          <Grid item>
-            <Typography variant="body2">{item.title}</Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h6">€{item.price}</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-      <Divider />
-    </Box>
-  ))
+  const goToPayment = () => {
+    navigate(PAYMENT)
+  }
 
   useEffect(() => {
     getCountries(setCountries)
@@ -133,6 +109,7 @@ const Checkout = () => {
               <Button
                 type="submit"
                 fullWidth
+                onClick={goToPayment}
                 sx={{
                   mt: 3,
                   mb: 2,
@@ -153,70 +130,7 @@ const Checkout = () => {
           </Grid>
         </Paper>
       </Grid>
-      <Grid item xs={5}>
-        <Paper
-          component="form"
-          noValidate
-          elevation={24}
-          sx={{
-            borderRadius: "30px",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "#e0e0e0",
-          }}
-        >
-          {cartContent}
-          <Grid container justifyContent="space-between" sx={{pr: 5, pt: 2, pl: 2}}>
-            <Grid item>
-              <Typography variant="h6">
-                Subtotal
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h6">
-                {subTotalPrice}€
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container justifyContent="space-between" sx={{pr: 5, pl: 2}}>
-            <Grid item>
-              <Typography variant="h6">
-                Tax
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h6">
-                {taxPrice}€
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container justifyContent="space-between" sx={{pr: 5, pl: 2, pb: 2}}>
-            <Grid item>
-              <Typography variant="h6">
-                Shipping
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h6">
-                Free
-              </Typography>
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid container justifyContent="space-between" sx={{pr: 5, pl: 2, pt: 5}}>
-            <Grid item>
-              <Typography variant="h6">
-                Total
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h4">
-                {totalPrice}€
-              </Typography>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
+      <CartContentCheckout />
     </Grid>
   )
 }

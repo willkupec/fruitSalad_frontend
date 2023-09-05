@@ -5,12 +5,13 @@ import Registration from "./pages/Registration/Registration"
 import Home from "./pages/Home/Home"
 import { ReactKeycloakProvider } from "@react-keycloak/web"
 import keycloak from "./Keycloak"
-import { CHECKOUT, LOGIN, REGISTRATION } from "./constants/frontend_routes"
+import { CHECKOUT, LOGIN, PAYMENT, REGISTRATION } from "./constants/frontend_routes"
 import Header from "./components/Header/Header"
 import UserProvider from "./context/UserContext/UserProvider"
 import CartProvider from "./context/CartContext/CartProvider"
 import Cart from "./components/Cart/Cart"
 import Checkout from "./pages/Checkout/Checkout"
+import Payment from "./pages/Payment/Payment"
 
 const App = () => {
   const location = useLocation()
@@ -25,6 +26,7 @@ const App = () => {
             <Route path={LOGIN} element={<Login />} />
             <Route path={REGISTRATION} element={<Registration />} />
             <Route path={CHECKOUT} element={<Checkout />} />
+            <Route path={PAYMENT} element={<Payment />} />
           </Routes>
         </CartProvider>
       </UserProvider>
