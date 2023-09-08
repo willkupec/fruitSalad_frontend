@@ -1,32 +1,45 @@
 import { Autocomplete, Button, Grid, Paper, Typography } from "@mui/material"
 import FormTextField from "../../components/FormTextField/FormTextField"
 import { useContext, useEffect, useState } from "react"
-import { COUNTRIES_API } from "../../constants/api_routes"
+import {
+  ADDRESS_BY_CUSTOMER_API,
+  COUNTRIES_API,
+} from "../../constants/api_routes"
 import { PAYMENT } from "../../constants/frontend_routes"
 import { map } from "lodash"
 import { useNavigate } from "react-router-dom"
 import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
 import UserContext from "../../context/UserContext/UserContext"
 
-const getCountries = async (setCountries) => {
-  return (
-    fetch(COUNTRIES_API, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      // maps names of countries
-      .then((data) => setCountries(map(data, (country) => country.name.common)))
-  )
-}
+const getCountries = async (setCountries) =>
+  fetch(COUNTRIES_API, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    // maps names of countries
+    .then((data) => setCountries(map(data, (country) => country.name.common)))
+
+const getAddressData = async (userData, setAddressData) =>
+  fetch(ADDRESS_BY_CUSTOMER_API + userData, {
+    method: "GET",
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => setAddressData(data))
 
 const Checkout = () => {
   const [countries, setCountries] = useState([])
+  const [addressData, setAddressData] = useState(null)
   const { userData } = useContext(UserContext)
   const navigate = useNavigate()
-  console.log(userData)
+
+  console.log(addressData)
+
   const goToPayment = () => {
     navigate(PAYMENT)
   }
@@ -34,6 +47,12 @@ const Checkout = () => {
   useEffect(() => {
     getCountries(setCountries)
   }, [])
+
+  useEffect(() => {
+    // if we have an address from logged in user
+    getAddressData(userData, setAddressData)
+    // load fields with address data
+  }, [userData])
 
   return (
     <Grid
