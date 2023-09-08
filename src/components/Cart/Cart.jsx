@@ -9,19 +9,17 @@ import { isEmpty } from "lodash"
 import CartContext from "../../context/CartContext/CartContext"
 import { useNavigate } from "react-router"
 import { CHECKOUT } from "../../constants/frontend_routes"
-import { useKeycloak } from "@react-keycloak/web"
 import CartContent from "../CartContent/CartContent"
 
 const Cart = () => {
   const { cart, setCart, showCart, setShowCart } = useContext(CartContext)
   const navigate = useNavigate()
-  const { keycloak } = useKeycloak()
   const removeFromCart = (cartItem) => {
     setCart(cart.filter((c) => c.id !== cartItem.id))
   }
 
   const goToCheckout = () =>
-    keycloak.authenticated ? navigate(CHECKOUT) : keycloak?.login()
+    navigate(CHECKOUT)
 
   const checkoutOnClick = () => {
     setShowCart(false)

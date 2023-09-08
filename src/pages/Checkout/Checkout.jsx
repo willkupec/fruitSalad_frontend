@@ -1,11 +1,12 @@
 import { Autocomplete, Button, Grid, Paper, Typography } from "@mui/material"
 import FormTextField from "../../components/FormTextField/FormTextField"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { COUNTRIES_API } from "../../constants/api_routes"
 import { PAYMENT } from "../../constants/frontend_routes"
 import { map } from "lodash"
 import { useNavigate } from "react-router-dom"
 import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
+import UserContext from "../../context/UserContext/UserContext"
 
 const getCountries = async (setCountries) => {
   return (
@@ -23,9 +24,9 @@ const getCountries = async (setCountries) => {
 
 const Checkout = () => {
   const [countries, setCountries] = useState([])
-
+  const { userData } = useContext(UserContext)
   const navigate = useNavigate()
-
+  console.log(userData)
   const goToPayment = () => {
     navigate(PAYMENT)
   }
