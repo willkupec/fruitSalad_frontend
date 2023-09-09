@@ -41,4 +41,11 @@ export const addAddressData = async (addressData) =>
     body: JSON.stringify(addressData),
   })
 
-export const updateAddressData = () => {}
+export const updateAddressData = async (addressData) =>
+  fetch(ADDRESS_API + "/" + addressData?.id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(addressData),
+  })

@@ -10,6 +10,7 @@ import {
   addAddressData,
   getAddressData,
   getCountries,
+  updateAddressData,
 } from "./checkout_fetches"
 
 const initialAddressData = {
@@ -29,14 +30,11 @@ const Checkout = () => {
   const { userData } = useContext(UserContext)
   const navigate = useNavigate()
 
-  console.log(addressData)
-
   const goToPayment = () => {
     // if there exists address data in db
     // update address, else
     // create new address
-    // addressFetched ? updateAddressData(addressData) : addAddressData(addressData)
-    addAddressData(addressData)
+    addressFetched ? updateAddressData(addressData) : addAddressData(addressData)
     navigate(PAYMENT)
   }
 
