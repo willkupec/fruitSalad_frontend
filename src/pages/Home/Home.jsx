@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import banner from "../../assets/temp_banner.jpg"
 import { Box, Grid } from "@mui/material"
 import CartItem from "./components/CartItem/CartItem"
 import { CART_ITEM_API } from "../../constants/api_routes"
-import { map } from "lodash"
+import { get, map } from "lodash"
+import { useKeycloak } from "@react-keycloak/web"
+import UserContext from "../../context/UserContext/UserContext"
 
 const getCartItems = async (setHomeItems) => {
   return fetch(CART_ITEM_API, {
@@ -18,6 +20,15 @@ const getCartItems = async (setHomeItems) => {
 
 const Home = () => {
   const [homeItems, setHomeItems] = useState([])
+  const keycloak = useKeycloak()
+  const { setUserData } = useContext(UserContext)
+
+  useEffect(() => {
+    if (get(keycloak, "keycloak.authenticated", null)) {
+      const sub = get(keycloak, "keycloak.idTokenParsed.sub", null)
+      setUserData(sub)
+    }
+  }, [keycloak, keycloak?.authenticated, setUserData])
 
   useEffect(() => {
     getCartItems(setHomeItems)

@@ -9,8 +9,8 @@ const CartContentCheckout = () => {
   const taxPrice = 4.35
   const totalPrice = subTotalPrice + taxPrice
 
-  const cartContent = map(cart, (item) => (
-    <Box key={item.id}>
+  const cartContent = map(cart, (item, index) => (
+    <Box key={`${index}_${item.id}`}>
       <Box display="flex" sx={{ pt: 2, pb: 2, ml: 2 }} alignItems="start">
         <Avatar
           src={item.src}
