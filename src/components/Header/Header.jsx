@@ -9,14 +9,14 @@ import LocalMallIcon from "@mui/icons-material/LocalMall"
 import fruitsalad_title from "../../assets/fruitsalad_title.png"
 import { HOME } from "../../constants/frontend_routes"
 import CartContext from "../../context/CartContext/CartContext"
-import UserContext from "../../context/UserContext/UserContext"
+import CustomerContext from "../../context/CustomerContext/CustomerContext"
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const navigate = useNavigate()
   const { keycloak } = useKeycloak()
   const { setShowCart } = useContext(CartContext)
-  const { setUserData } = useContext(UserContext)
+  const { setCustomer } = useContext(CustomerContext)
 
   const handleMenu = (event) => {
     if (!keycloak?.authenticated) {
@@ -27,7 +27,7 @@ const Header = () => {
 
   const logout = () => {
     keycloak?.logout()
-    setUserData(null)
+    setCustomer(null)
     navigate(HOME)
   }
 

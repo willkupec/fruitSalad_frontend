@@ -5,7 +5,7 @@ import { PAYMENT } from "../../constants/frontend_routes"
 import { map } from "lodash"
 import { useNavigate } from "react-router-dom"
 import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
-import UserContext from "../../context/UserContext/UserContext"
+import CustomerContext from "../../context/CustomerContext/CustomerContext"
 import {
   addAddressData,
   getAddressData,
@@ -27,7 +27,7 @@ const Checkout = () => {
   const [countries, setCountries] = useState([])
   const [addressData, setAddressData] = useState(initialAddressData)
   const [addressFetched, setAddressFetched] = useState(false)
-  const { userData } = useContext(UserContext)
+  const { customer } = useContext(CustomerContext)
   const navigate = useNavigate()
 
   const goToPayment = () => {
@@ -45,11 +45,11 @@ const Checkout = () => {
   useEffect(() => {
     // if we have an address from logged in user
     // load fields with address data
-    getAddressData(userData, setAddressData, setAddressFetched)
+    getAddressData(customer, setAddressData, setAddressFetched)
     //sets customer string when user has no prev address
     if(addressFetched)
-      setAddressData((prevData) => ({ ...prevData, customer: userData }))
-  }, [userData])
+      setAddressData((prevData) => ({ ...prevData, customer: customer }))
+  }, [customer])
 
   return (
     <Grid

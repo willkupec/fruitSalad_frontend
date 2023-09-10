@@ -17,11 +17,11 @@ export const getCountries = async (setCountries) =>
     .then((data) => setCountries(map(data, (country) => country.name.common)))
 
 export const getAddressData = async (
-  userData,
+  customer,
   setAddressData,
   setAddressFetched
 ) =>
-  fetch(ADDRESS_BY_CUSTOMER_API + userData, {
+  fetch(ADDRESS_BY_CUSTOMER_API + customer, {
     method: "GET",
   })
     .then((response) => response.json())
