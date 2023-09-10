@@ -2,7 +2,6 @@ import { Autocomplete, Button, Grid, Paper, Typography } from "@mui/material"
 import FormTextField from "../../components/FormTextField/FormTextField"
 import { useContext, useEffect, useState } from "react"
 import { PAYMENT } from "../../constants/frontend_routes"
-import { map } from "lodash"
 import { useNavigate } from "react-router-dom"
 import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
 import CustomerContext from "../../context/CustomerContext/CustomerContext"
@@ -19,7 +18,7 @@ const initialAddressData = {
   addressEtc: "",
   city: "",
   country: "",
-  zipCode: 0,
+  zipCode: "",
   customer: "",
 }
 
@@ -49,7 +48,7 @@ const Checkout = () => {
     //sets customer string when user has no prev address
     if(addressFetched)
       setAddressData((prevData) => ({ ...prevData, customer: customer }))
-  }, [customer])
+  }, [addressFetched, customer])
 
   return (
     <Grid
@@ -171,7 +170,7 @@ const Checkout = () => {
                   onChange={(e) =>
                     setAddressData((prevData) => ({
                       ...prevData,
-                      zipCode: e.target.value,
+                      zipCode: parseInt(e.target.value),
                     }))
                   }
                   label="Postal Code"
