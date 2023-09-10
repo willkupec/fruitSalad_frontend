@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import { HOME, REGISTRATION } from "../../constants/frontend_routes"
 import { LOGIN_API } from "../../constants/api_routes"
-import UserContext from "../../context/UserContext/UserContext"
+import CustomerContext from "../../context/CustomerContext/CustomerContext"
 
 const loginUser = async (credentials) => {
   return fetch(LOGIN_API, {
@@ -25,7 +25,7 @@ const loginUser = async (credentials) => {
 
 const Login = () => {
   const navigate = useNavigate()
-  const { setUserData } = useContext(UserContext)
+  const { setCustomer } = useContext(CustomerContext)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -37,7 +37,7 @@ const Login = () => {
       if (user.error) {
         console.log("error:", user.error)
       } else {
-        setUserData(user)
+        setCustomer(user)
         navigate(HOME)
       }
     } catch (e) {
