@@ -45,9 +45,8 @@ const Checkout = () => {
     // if we have an address from logged in user
     // load fields with address data
     getAddressData(customer, setAddressData, setAddressFetched)
-    //sets customer string when user has no prev address
-    if(addressFetched)
-      setAddressData((prevData) => ({ ...prevData, customer: customer }))
+    //sets customer string
+    setAddressData((prevData) => ({ ...prevData, customer: customer }))
   }, [addressFetched, customer])
 
   return (

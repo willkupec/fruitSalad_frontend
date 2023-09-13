@@ -6,25 +6,32 @@ import CustomerContext from "../../context/CustomerContext/CustomerContext"
 import { makePayment } from "./payment_fetches"
 import { useNavigate } from "react-router-dom"
 import { HOME } from "../../constants/frontend_routes"
+import CartContext from "../../context/CartContext/CartContext"
 
 const initialPaymentData = {
+  totalPrice: 0,
   name: "",
   number: "",
   expiryDate: "",
   cvv: "",
   customer: "",
+  orderItems: []
 }
 
 const Payment = () => {
   const [payment, setPayment] = useState(initialPaymentData)
   const { customer } = useContext(CustomerContext)
+  const { cart } = useContext(CartContext)
   const navigate = useNavigate()
+
+  // console.log(cart)
 
   useEffect(() => {
     setPayment((prevData) => ({ ...prevData, customer: customer }))
+    setPayment((prevData) => ({ ...prevData, customer: customer }))
   }, [customer])
 
-  console.log(payment)
+  // console.log(payment)
 
   const completeOrder = () => {
     makePayment(payment)
