@@ -1,11 +1,10 @@
-import React, { useState } from "react"
+import React from "react"
 import { Box, Paper, Typography, Button } from "@mui/material"
 import useCart from "../../../../hooks/useCart"
 
 const CartItem = ({ cartItem }) => {
-  const [quantity, setQuantity] = useState(1)
   const { src, title, price } = cartItem
-  const { addToCart } = useCart(cartItem, quantity, setQuantity)
+  const { addToCart } = useCart(cartItem)
 
   return (
     <>

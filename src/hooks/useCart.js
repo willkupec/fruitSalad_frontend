@@ -1,31 +1,27 @@
 import { useContext } from "react"
 import CartContext from "../context/CartContext/CartContext"
-import { find, includes, map } from "lodash"
+import { find, map } from "lodash"
 
-const useCart = (cartItem, quantity, setQuantity) => {
+const useCart = (cartItem) => {
   const { cart, setCart } = useContext(CartContext)
   const cartItemExists = find(cart, (c) => c?.id === cartItem?.id)
 
-  console.log("!cartItemExists:", !cartItemExists)
   const addToCart = () => {
     if (!cartItemExists) {
-      setCart((c) => [...c, { ...cartItem, quantity: quantity }])
+      setCart((c) => [...c, { ...cartItem, quantity: 1 }])
     } else {
-
+      // when cart item exists, increments quantity
       setCart(
         map(cart, (c) => {
           if (c.id === cartItem.id) {
-            c.quantity = quantity
+            c.quantity = c.quantity + 1
           }
           return c
         })
       )
-      setQuantity(quantity + 1)
     }
 
   }
-
-  console.log(cart)
 
   return { addToCart }
 }
