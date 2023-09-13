@@ -7,6 +7,7 @@ import { makePayment } from "./payment_fetches"
 import { useNavigate } from "react-router-dom"
 import { HOME } from "../../constants/frontend_routes"
 import CartContext from "../../context/CartContext/CartContext"
+import { map, omit } from "lodash"
 
 const initialPaymentData = {
   totalPrice: 0,
@@ -15,23 +16,29 @@ const initialPaymentData = {
   expiryDate: "",
   cvv: "",
   customer: "",
-  orderItems: []
+  orderItems: [],
 }
 
-const Payment = () => {
-  const [payment, setPayment] = useState(initialPaymentData)
-  const { customer } = useContext(CustomerContext)
-  const { cart } = useContext(CartContext)
-  const navigate = useNavigate()
+const getOrderItems = cart => map(cart, (cartItem) => {
+  return { quantity: cartItem.quantity, cartItem: omit(cartItem, "quantity") }
+})
 
-  // console.log(cart)
+const Payment = () => {
+  const { cart } = useContext(CartContext)
+  const [payment, setPayment] = useState(initialPaymentData)
+  const orderItems = getOrderItems(cart)
+  // calculate totalPrice per quantity
+  const { customer } = useContext(CustomerContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setPayment((prevData) => ({ ...prevData, customer: customer }))
-    setPayment((prevData) => ({ ...prevData, customer: customer }))
-  }, [customer])
+    setPayment((prevData) => ({ ...prevData, orderItems: orderItems }))
+  }, [customer, orderItems])
 
-  // console.log(payment)
+  console.log(payment)
+
+  // console.log(orderItems)
 
   const completeOrder = () => {
     makePayment(payment)
