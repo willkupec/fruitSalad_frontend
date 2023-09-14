@@ -5,7 +5,7 @@ import CartItem from "./components/CartItem/CartItem"
 import { CART_ITEM_API } from "../../constants/api_routes"
 import { get, map } from "lodash"
 import { useKeycloak } from "@react-keycloak/web"
-import UserContext from "../../context/UserContext/UserContext"
+import CustomerContext from "../../context/CustomerContext/CustomerContext"
 
 const getCartItems = async (setHomeItems) => {
   return fetch(CART_ITEM_API, {
@@ -21,14 +21,14 @@ const getCartItems = async (setHomeItems) => {
 const Home = () => {
   const [homeItems, setHomeItems] = useState([])
   const keycloak = useKeycloak()
-  const { setUserData } = useContext(UserContext)
+  const { setCustomer } = useContext(CustomerContext)
 
   useEffect(() => {
     if (get(keycloak, "keycloak.authenticated", null)) {
       const sub = get(keycloak, "keycloak.idTokenParsed.sub", null)
-      setUserData(sub)
+      setCustomer(sub)
     }
-  }, [keycloak, keycloak?.authenticated, setUserData])
+  }, [keycloak, keycloak?.authenticated, setCustomer])
 
   useEffect(() => {
     getCartItems(setHomeItems)

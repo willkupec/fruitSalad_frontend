@@ -1,7 +1,7 @@
 import { map } from "lodash"
 import {
-  ADDRESS_API,
-  ADDRESS_BY_CUSTOMER_API,
+  CHECKOUT_API,
+  CHECKOUT_BY_CUSTOMER_API,
   COUNTRIES_API,
 } from "../../constants/api_routes"
 
@@ -17,11 +17,11 @@ export const getCountries = async (setCountries) =>
     .then((data) => setCountries(map(data, (country) => country.name.common)))
 
 export const getAddressData = async (
-  userData,
+  customer,
   setAddressData,
   setAddressFetched
 ) =>
-  fetch(ADDRESS_BY_CUSTOMER_API + userData, {
+  fetch(CHECKOUT_BY_CUSTOMER_API + customer, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -33,7 +33,7 @@ export const getAddressData = async (
     })
 
 export const addAddressData = async (addressData) =>
-  fetch(ADDRESS_API, {
+  fetch(CHECKOUT_API, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const addAddressData = async (addressData) =>
   })
 
 export const updateAddressData = async (addressData) =>
-  fetch(ADDRESS_API + "/" + addressData?.id, {
+  fetch(CHECKOUT_API + "/" + addressData?.id, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

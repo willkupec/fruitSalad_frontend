@@ -13,6 +13,7 @@ const CartContent = ({ cart, removeFromCart }) =>
         <Box display="flex" flexDirection="column">
           <Typography variant="h6">{item.title}</Typography>
           <Typography variant="body1">€{item.price}</Typography>
+          <Typography variant="body1">Quantity: {item.quantity}</Typography>
         </Box>
         <IconButton
           onClick={() => removeFromCart(item)}

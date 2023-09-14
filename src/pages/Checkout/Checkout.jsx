@@ -2,10 +2,9 @@ import { Autocomplete, Button, Grid, Paper, Typography } from "@mui/material"
 import FormTextField from "../../components/FormTextField/FormTextField"
 import { useContext, useEffect, useState } from "react"
 import { PAYMENT } from "../../constants/frontend_routes"
-import { map } from "lodash"
 import { useNavigate } from "react-router-dom"
 import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
-import UserContext from "../../context/UserContext/UserContext"
+import CustomerContext from "../../context/CustomerContext/CustomerContext"
 import {
   addAddressData,
   getAddressData,
@@ -19,7 +18,7 @@ const initialAddressData = {
   addressEtc: "",
   city: "",
   country: "",
-  zipCode: 0,
+  zipCode: "",
   customer: "",
 }
 
@@ -27,7 +26,7 @@ const Checkout = () => {
   const [countries, setCountries] = useState([])
   const [addressData, setAddressData] = useState(initialAddressData)
   const [addressFetched, setAddressFetched] = useState(false)
-  const { userData } = useContext(UserContext)
+  const { customer } = useContext(CustomerContext)
   const navigate = useNavigate()
 
   const goToPayment = () => {
@@ -45,11 +44,10 @@ const Checkout = () => {
   useEffect(() => {
     // if we have an address from logged in user
     // load fields with address data
-    getAddressData(userData, setAddressData, setAddressFetched)
-    //sets customer string when user has no prev address
-    if(addressFetched)
-      setAddressData((prevData) => ({ ...prevData, customer: userData }))
-  }, [userData])
+    getAddressData(customer, setAddressData, setAddressFetched)
+    //sets customer string
+    setAddressData((prevData) => ({ ...prevData, customer: customer }))
+  }, [addressFetched, customer])
 
   return (
     <Grid
@@ -171,7 +169,7 @@ const Checkout = () => {
                   onChange={(e) =>
                     setAddressData((prevData) => ({
                       ...prevData,
-                      zipCode: e.target.value,
+                      zipCode: parseInt(e.target.value),
                     }))
                   }
                   label="Postal Code"

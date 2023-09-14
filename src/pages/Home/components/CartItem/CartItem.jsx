@@ -5,6 +5,7 @@ import useCart from "../../../../hooks/useCart"
 const CartItem = ({ cartItem }) => {
   const { src, title, price } = cartItem
   const { addToCart } = useCart(cartItem)
+
   return (
     <>
       <Paper

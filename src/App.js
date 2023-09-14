@@ -12,7 +12,7 @@ import {
   REGISTRATION,
 } from "./constants/frontend_routes"
 import Header from "./components/Header/Header"
-import UserProvider from "./context/UserContext/UserProvider"
+import CustomerProvider from "./context/CustomerContext/CustomerProvider"
 import CartProvider from "./context/CartContext/CartProvider"
 import Cart from "./components/Cart/Cart"
 import Checkout from "./pages/Checkout/Checkout"
@@ -23,7 +23,7 @@ const App = () => {
   const location = useLocation()
   return (
     <ReactKeycloakProvider authClient={keycloak}>
-      <UserProvider>
+      <CustomerProvider>
         <CartProvider>
           <Cart />
           <Header />
@@ -49,7 +49,7 @@ const App = () => {
             />
           </Routes>
         </CartProvider>
-      </UserProvider>
+      </CustomerProvider>
     </ReactKeycloakProvider>
   )
 }

@@ -1,8 +1,52 @@
 import { Button, Grid, Paper, Typography } from "@mui/material"
 import CartContentCheckout from "../../components/CartContent/CartContentCheckout"
 import FormTextField from "../../components/FormTextField/FormTextField"
+import { useContext, useEffect, useState } from "react"
+import CustomerContext from "../../context/CustomerContext/CustomerContext"
+import { placeOrder } from "./payment_fetches"
+import { useNavigate } from "react-router-dom"
+import { HOME } from "../../constants/frontend_routes"
+import CartContext from "../../context/CartContext/CartContext"
+import { map, omit, sumBy } from "lodash"
+
+const initialPaymentData = {
+  totalPrice: 0,
+  name: "",
+  number: "",
+  expiryDate: "",
+  cvv: "",
+  customer: "",
+  orderItems: [],
+}
+
+const getOrderItems = (cart) =>
+  map(cart, (cartItem) => {
+    return { quantity: cartItem.quantity, cartItem: omit(cartItem, "quantity") }
+  })
+
+const calculateTotalPrice = (orderItems) =>
+  sumBy(orderItems, ({ quantity, cartItem }) => quantity * cartItem.price)
 
 const Payment = () => {
+  const { cart } = useContext(CartContext)
+  const [payment, setPayment] = useState(initialPaymentData)
+  const { customer } = useContext(CustomerContext)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    setPayment((prevData) => ({
+      ...prevData,
+      customer: customer,
+      orderItems: getOrderItems(cart),
+      totalPrice: calculateTotalPrice(getOrderItems(cart)),
+    }))
+  }, [cart, customer])
+
+  const completeOrder = () => {
+    placeOrder(payment)
+    navigate(HOME)
+  }
+
   return (
     <Grid
       container
@@ -58,6 +102,13 @@ const Payment = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormTextField
+                  value={payment.name}
+                  onChange={(e) =>
+                    setPayment((prevData) => ({
+                      ...prevData,
+                      name: e.target.value,
+                    }))
+                  }
                   required
                   label="Name on card"
                   autoComplete="cc-name"
@@ -65,6 +116,13 @@ const Payment = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormTextField
+                  value={payment.number}
+                  onChange={(e) =>
+                    setPayment((prevData) => ({
+                      ...prevData,
+                      number: parseInt(e.target.value),
+                    }))
+                  }
                   required
                   label="Card number"
                   autoComplete="cc-number"
@@ -72,6 +130,13 @@ const Payment = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormTextField
+                  value={payment.expiryDate}
+                  onChange={(e) =>
+                    setPayment((prevData) => ({
+                      ...prevData,
+                      expiryDate: e.target.value,
+                    }))
+                  }
                   required
                   label="Expiry date"
                   autoComplete="cc-exp"
@@ -79,6 +144,13 @@ const Payment = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormTextField
+                  value={payment.cvv}
+                  onChange={(e) =>
+                    setPayment((prevData) => ({
+                      ...prevData,
+                      cvv: parseInt(e.target.value),
+                    }))
+                  }
                   required
                   label="CVV"
                   helperText="Last three digits on signature strip"
@@ -90,6 +162,7 @@ const Payment = () => {
               <Button
                 type="submit"
                 fullWidth
+                onClick={completeOrder}
                 sx={{
                   mt: 3,
                   mb: 2,

@@ -1,11 +1,6 @@
 import React, { useContext } from "react"
-import {
-  Box,
-  Typography,
-  Drawer,
-  Button,
-} from "@mui/material"
-import { isEmpty } from "lodash"
+import { Box, Typography, Drawer, Button } from "@mui/material"
+import { filter, isEmpty } from "lodash"
 import CartContext from "../../context/CartContext/CartContext"
 import { useNavigate } from "react-router"
 import { CHECKOUT } from "../../constants/frontend_routes"
@@ -15,11 +10,20 @@ const Cart = () => {
   const { cart, setCart, showCart, setShowCart } = useContext(CartContext)
   const navigate = useNavigate()
   const removeFromCart = (cartItem) => {
-    setCart(cart.filter((c) => c.id !== cartItem.id))
+    setCart(
+      filter(cart, (c) => {
+        if (c.quantity > 1) {
+          if (c.id === cartItem.id) {
+            c.quantity = c.quantity - 1
+          }
+          return c
+        }
+        return c.id !== cartItem.id
+      })
+    )
   }
 
-  const goToCheckout = () =>
-    navigate(CHECKOUT)
+  const goToCheckout = () => navigate(CHECKOUT)
 
   const checkoutOnClick = () => {
     setShowCart(false)
