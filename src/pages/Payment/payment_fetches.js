@@ -1,7 +1,7 @@
 import { PAYMENT_API } from "../../constants/api_routes";
 
 
-export const makePayment = async (payment) =>
+export const placeOrder = async (payment) =>
   fetch(PAYMENT_API, {
     method: "POST",
     headers: {

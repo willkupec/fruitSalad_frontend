@@ -3,11 +3,11 @@ import CartContentCheckout from "../../components/CartContent/CartContentCheckou
 import FormTextField from "../../components/FormTextField/FormTextField"
 import { useContext, useEffect, useState } from "react"
 import CustomerContext from "../../context/CustomerContext/CustomerContext"
-import { makePayment } from "./payment_fetches"
+import { placeOrder } from "./payment_fetches"
 import { useNavigate } from "react-router-dom"
 import { HOME } from "../../constants/frontend_routes"
 import CartContext from "../../context/CartContext/CartContext"
-import { map, omit } from "lodash"
+import { map, omit, sumBy } from "lodash"
 
 const initialPaymentData = {
   totalPrice: 0,
@@ -19,29 +19,31 @@ const initialPaymentData = {
   orderItems: [],
 }
 
-const getOrderItems = cart => map(cart, (cartItem) => {
-  return { quantity: cartItem.quantity, cartItem: omit(cartItem, "quantity") }
-})
+const getOrderItems = (cart) =>
+  map(cart, (cartItem) => {
+    return { quantity: cartItem.quantity, cartItem: omit(cartItem, "quantity") }
+  })
+
+const calculateTotalPrice = (orderItems) =>
+  sumBy(orderItems, ({ quantity, cartItem }) => quantity * cartItem.price)
 
 const Payment = () => {
   const { cart } = useContext(CartContext)
   const [payment, setPayment] = useState(initialPaymentData)
-  const orderItems = getOrderItems(cart)
-  // calculate totalPrice per quantity
   const { customer } = useContext(CustomerContext)
   const navigate = useNavigate()
 
   useEffect(() => {
-    setPayment((prevData) => ({ ...prevData, customer: customer }))
-    setPayment((prevData) => ({ ...prevData, orderItems: orderItems }))
-  }, [customer, orderItems])
-
-  console.log(payment)
-
-  // console.log(orderItems)
+    setPayment((prevData) => ({
+      ...prevData,
+      customer: customer,
+      orderItems: getOrderItems(cart),
+      totalPrice: calculateTotalPrice(getOrderItems(cart)),
+    }))
+  }, [cart, customer])
 
   const completeOrder = () => {
-    makePayment(payment)
+    placeOrder(payment)
     navigate(HOME)
   }
 
