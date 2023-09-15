@@ -28,12 +28,22 @@ const Checkout = () => {
   const [addressFetched, setAddressFetched] = useState(false)
   const { customer } = useContext(CustomerContext)
   const navigate = useNavigate()
+  const paymentButtonDisabled =
+    !addressData.name ||
+    !addressData.address ||
+    !addressData.addressEtc ||
+    !addressData.city ||
+    !addressData.country ||
+    !addressData.zipCode ||
+    !addressData.customer
 
   const goToPayment = () => {
     // if there exists address data in db
     // update address, else
     // create new address
-    addressFetched ? updateAddressData(addressData) : addAddressData(addressData)
+    addressFetched
+      ? updateAddressData(addressData)
+      : addAddressData(addressData)
     navigate(PAYMENT)
   }
 
@@ -181,6 +191,7 @@ const Checkout = () => {
               <Button
                 type="submit"
                 fullWidth
+                disabled={paymentButtonDisabled}
                 onClick={goToPayment}
                 sx={{
                   mt: 3,
