@@ -32,6 +32,12 @@ const Payment = () => {
   const [payment, setPayment] = useState(initialPaymentData)
   const { customer } = useContext(CustomerContext)
   const navigate = useNavigate()
+  const orderButtonDisabled =
+    !payment.name ||
+    !payment.number ||
+    !payment.expiryDate ||
+    !payment.cvv ||
+    !payment.customer
 
   useEffect(() => {
     setPayment((prevData) => ({
@@ -162,6 +168,7 @@ const Payment = () => {
               <Button
                 type="submit"
                 fullWidth
+                disabled={orderButtonDisabled}
                 onClick={completeOrder}
                 sx={{
                   mt: 3,
