@@ -5,10 +5,12 @@ import CartContext from "../../context/CartContext/CartContext"
 import { useNavigate } from "react-router"
 import { CHECKOUT } from "../../constants/frontend_routes"
 import CartContent from "../CartContent/CartContent"
+import { useKeycloak } from "@react-keycloak/web"
 
 const Cart = () => {
   const { cart, setCart, showCart, setShowCart } = useContext(CartContext)
   const navigate = useNavigate()
+  const { keycloak } = useKeycloak()
   const removeFromCart = (cartItem) => {
     setCart(
       filter(cart, (c) => {
@@ -27,7 +29,7 @@ const Cart = () => {
 
   const checkoutOnClick = () => {
     setShowCart(false)
-    goToCheckout()
+    keycloak?.authenticated ? goToCheckout() : keycloak?.login()
   }
 
   return (
