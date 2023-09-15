@@ -17,7 +17,6 @@ import CartProvider from "./context/CartContext/CartProvider"
 import Cart from "./components/Cart/Cart"
 import Checkout from "./pages/Checkout/Checkout"
 import Payment from "./pages/Payment/Payment"
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute"
 
 const App = () => {
   const location = useLocation()
@@ -31,22 +30,12 @@ const App = () => {
             <Route path={"*"} element={<Home />} />
             <Route path={LOGIN} element={<Login />} />
             <Route path={REGISTRATION} element={<Registration />} />
-            <Route
-              path={CHECKOUT}
-              element={
-                <PrivateRoute>
-                  <Checkout />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={PAYMENT}
-              element={
-                <PrivateRoute>
-                  <Payment />
-                </PrivateRoute>
-              }
-            />
+            {keycloak?.authenticated && (
+              <Route path={CHECKOUT} element={<Checkout />} />
+            )}
+            {keycloak?.authenticated && (
+              <Route path={PAYMENT} element={<Payment />} />
+            )}
           </Routes>
         </CartProvider>
       </CustomerProvider>
