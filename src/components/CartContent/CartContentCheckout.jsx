@@ -1,11 +1,12 @@
 import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material"
-import { map, sumBy } from "lodash"
+import { map } from "lodash"
 import CartContext from "../../context/CartContext/CartContext"
 import { useContext } from "react"
+import { calculateTotalPrice, getOrderItems } from "../../pages/Payment/Payment"
 
 const CartContentCheckout = () => {
   const { cart } = useContext(CartContext)
-  const subTotalPrice = sumBy(cart, (item) => item.price)
+  const subTotalPrice = calculateTotalPrice(getOrderItems(cart))
   const taxPrice = 4.35
   const totalPrice = subTotalPrice + taxPrice
 
@@ -16,9 +17,12 @@ const CartContentCheckout = () => {
           src={item.src}
           sx={{ width: 45, height: 45, mr: 2, borderRadius: 0 }}
         />
-        <Grid container justifyContent="space-between" sx={{ pr: 5, pt: 1 }}>
+        <Grid container justifyContent="space-between" alignItems="center" sx={{ pr: 5, pt: 1 }}>
           <Grid item>
             <Typography variant="body2">{item.title}</Typography>
+          </Grid>
+          <Grid item>
+          <Typography variant="h6" >Quantity: {item.quantity}</Typography>
           </Grid>
           <Grid item>
             <Typography variant="h6">€{item.price}</Typography>

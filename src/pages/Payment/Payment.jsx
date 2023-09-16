@@ -19,12 +19,12 @@ const initialPaymentData = {
   orderItems: [],
 }
 
-const getOrderItems = (cart) =>
+export const getOrderItems = (cart) =>
   map(cart, (cartItem) => {
     return { quantity: cartItem.quantity, cartItem: omit(cartItem, "quantity") }
   })
 
-const calculateTotalPrice = (orderItems) =>
+export const calculateTotalPrice = (orderItems) =>
   sumBy(orderItems, ({ quantity, cartItem }) => quantity * cartItem.price)
 
 const Payment = () => {
