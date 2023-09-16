@@ -28,7 +28,7 @@ export const calculateTotalPrice = (orderItems) =>
   sumBy(orderItems, ({ quantity, cartItem }) => quantity * cartItem.price)
 
 const Payment = () => {
-  const { cart } = useContext(CartContext)
+  const { cart, setCart } = useContext(CartContext)
   const [payment, setPayment] = useState(initialPaymentData)
   const { customer } = useContext(CustomerContext)
   const navigate = useNavigate()
@@ -50,6 +50,7 @@ const Payment = () => {
 
   const completeOrder = () => {
     placeOrder(payment)
+    setCart([])
     navigate(HOME)
   }
 
