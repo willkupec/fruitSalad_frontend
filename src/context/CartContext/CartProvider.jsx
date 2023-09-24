@@ -6,7 +6,7 @@ import { map, omit } from "lodash"
 
 export const getOrderItems = (cart) =>
   map(cart, (cartItem) => {
-    return { quantity: cartItem.quantity, cartItem: omit(cartItem, "quantity") }
+    return omit({...cartItem, cartItemId: cartItem.id}, ["id", "src"])
   })
 
 const setOrderItems = async (orderItems) =>
