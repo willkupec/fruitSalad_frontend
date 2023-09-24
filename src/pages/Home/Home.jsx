@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext } from "react"
 import banner from "../../assets/temp_banner.jpg"
 import { Box, Grid } from "@mui/material"
 import CartItem from "./components/CartItem/CartItem"
-import { CART_ITEM_API } from "../../constants/api_routes"
+import { CART_API } from "../../constants/api_routes"
 import { get, map } from "lodash"
 import { useKeycloak } from "@react-keycloak/web"
 import CustomerContext from "../../context/CustomerContext/CustomerContext"
 
 const getCartItems = async (setHomeItems) => {
-  return fetch(CART_ITEM_API, {
+  return fetch(CART_API, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

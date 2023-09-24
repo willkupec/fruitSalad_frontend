@@ -2,7 +2,8 @@ import { Avatar, Box, Divider, Grid, Paper, Typography } from "@mui/material"
 import { map } from "lodash"
 import CartContext from "../../context/CartContext/CartContext"
 import { useContext } from "react"
-import { calculateTotalPrice, getOrderItems } from "../../pages/Payment/Payment"
+import { calculateTotalPrice } from "../../pages/Payment/Payment"
+import { getOrderItems } from "../../context/CartContext/CartProvider"
 
 const CartContentCheckout = () => {
   const { cart } = useContext(CartContext)
