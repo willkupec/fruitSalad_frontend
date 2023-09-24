@@ -10,7 +10,7 @@ export const getOrderItems = (cart) =>
   })
 
 const setOrderItems = async (orderItems) =>
-  fetch(CART_API, {
+  fetch(CART_API + "/setOrderItems", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,7 +29,9 @@ const CartProvider = (props) => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart))
+    setOrderItems(getOrderItems(cart))
   }, [cart])
+
 
   console.log("orderItems:", getOrderItems(cart))
 
