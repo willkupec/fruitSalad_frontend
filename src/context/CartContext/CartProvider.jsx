@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
 import CartContext from "./CartContext"
-import { CART_API } from "../../constants/api_routes"
+import { SET_ORDER_ITEMS_API } from "../../constants/api_routes"
 import { map, omit } from "lodash"
 
 export const getOrderItems = (cart) =>
@@ -10,7 +10,7 @@ export const getOrderItems = (cart) =>
   })
 
 const setOrderItems = async (orderItems) =>
-  fetch(CART_API + "/setOrderItems", {
+  fetch(SET_ORDER_ITEMS_API, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

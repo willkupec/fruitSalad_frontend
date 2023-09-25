@@ -17,11 +17,10 @@ const initialPaymentData = {
   expiryDate: "",
   cvv: "",
   customer: "",
-  orderItems: [],
 }
 
 export const calculateTotalPrice = (orderItems) =>
-  sumBy(orderItems, ({ quantity, cartItem }) => quantity * cartItem.price)
+  sumBy(orderItems, ({ quantity, price }) => quantity * price)
 
 const Payment = () => {
   const { cart, setCart } = useContext(CartContext)
@@ -39,14 +38,14 @@ const Payment = () => {
     setPayment((prevData) => ({
       ...prevData,
       customer: customer,
-      orderItems: getOrderItems(cart),
       totalPrice: calculateTotalPrice(getOrderItems(cart)),
     }))
   }, [cart, customer])
 
+  console.log(payment)
+
   const completeOrder = () => {
-    placeOrder(payment)
-    setCart([])
+    placeOrder(payment,setCart)
     navigate(HOME)
   }
 
