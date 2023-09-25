@@ -1,14 +1,14 @@
-const API = process.env.REACT_APP_API
+const CART = process.env.REACT_APP_CART
+const CHECKOUT = process.env.REACT_APP_CHECKOUT
+const PAYMENT = process.env.REACT_APP_PAYMENT
 
 // API Routes
 
-export const CUSTOMER_API = `${API}/customer`
-export const CART_ITEM_API = `${API}/cartItem`
-export const CHECKOUT_API = `${API}/checkout`
+export const CART_API = `${CART}/cart`
+export const SET_ORDER_ITEMS_API = `${CART_API}/setOrderItems`
+export const CHECKOUT_API = `${CHECKOUT}/checkout`
 export const CHECKOUT_BY_CUSTOMER_API = `${CHECKOUT_API}/customer/`
-export const PAYMENT_API = `${API}/payment`
-export const LOGIN_API = `${CUSTOMER_API}/login`
-export const REGISTRATION_API = `${CUSTOMER_API}/register`
+export const PAYMENT_API = `${PAYMENT}/payment`
 
 // External API Routes
 

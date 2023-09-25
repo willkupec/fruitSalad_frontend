@@ -7,7 +7,8 @@ import { placeOrder } from "./payment_fetches"
 import { useNavigate } from "react-router-dom"
 import { HOME } from "../../constants/frontend_routes"
 import CartContext from "../../context/CartContext/CartContext"
-import { map, omit, sumBy } from "lodash"
+import { sumBy } from "lodash"
+import { getOrderItems } from "../../context/CartContext/CartProvider"
 
 const initialPaymentData = {
   totalPrice: 0,
@@ -16,16 +17,10 @@ const initialPaymentData = {
   expiryDate: "",
   cvv: "",
   customer: "",
-  orderItems: [],
 }
 
-export const getOrderItems = (cart) =>
-  map(cart, (cartItem) => {
-    return { quantity: cartItem.quantity, cartItem: omit(cartItem, "quantity") }
-  })
-
 export const calculateTotalPrice = (orderItems) =>
-  sumBy(orderItems, ({ quantity, cartItem }) => quantity * cartItem.price)
+  sumBy(orderItems, ({ quantity, price }) => quantity * price)
 
 const Payment = () => {
   const { cart, setCart } = useContext(CartContext)
@@ -43,14 +38,14 @@ const Payment = () => {
     setPayment((prevData) => ({
       ...prevData,
       customer: customer,
-      orderItems: getOrderItems(cart),
       totalPrice: calculateTotalPrice(getOrderItems(cart)),
     }))
   }, [cart, customer])
 
+  console.log(payment)
+
   const completeOrder = () => {
-    placeOrder(payment)
-    setCart([])
+    placeOrder(payment,setCart)
     navigate(HOME)
   }
 
