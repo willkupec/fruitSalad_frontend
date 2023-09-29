@@ -5,9 +5,9 @@ import { SET_ORDER_ITEMS_API } from "../../constants/api_routes"
 import { map, omit } from "lodash"
 
 export const getOrderItems = (cart) =>
-  map(cart, (cartItem) => {
-    return omit({...cartItem, cartItemId: cartItem.id}, ["id", "src"])
-  })
+  map(cart, (cartItem) =>
+    omit({ ...cartItem, cartItemId: cartItem.id }, ["id", "src"])
+  )
 
 const setOrderItems = async (orderItems) =>
   fetch(SET_ORDER_ITEMS_API, {
@@ -31,7 +31,6 @@ const CartProvider = (props) => {
     localStorage.setItem("cart", JSON.stringify(cart))
     setOrderItems(getOrderItems(cart))
   }, [cart])
-
 
   console.log("orderItems:", getOrderItems(cart))
 
